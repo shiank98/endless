@@ -1,0 +1,26 @@
+[
+  {
+    "title": "1. Setup",
+    "file": "setup.md"
+  },
+
+  {
+    "title": "2. Usage",
+    "file": "usage.md"
+  },
+
+  {
+    "title": "3. Development",
+    "file": "development.md"
+  },
+
+  {
+    "title": "4. Building",
+    "file": "building.md"
+  },
+
+  {
+    "title": "5. Deployment",
+    "file": "deployment.md"
+  }
+]
