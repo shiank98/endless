@@ -1,1 +1,24 @@
-/* You can add global styles to this file, and also import other style files */
+/**
+ * Launch Screen
+ */
+ 
+/* A random background image is set by the launch screen component */
+launch-menu-screen {
+  display: block;
+  height: 100vh;
+  width: 100vw;
+  background-size: 100% 100%;
+}
+
+/* A random hero sprite image is set by the launch screen component */
+launch-menu-screen .hero {
+  display: block;
+  height: 90%;
+  width: 50%;
+  position: absolute;
+  right: 5%;
+  bottom: 2%;
+  background-size: contain;
+  background-position: center bottom;
+  background-repeat: no-repeat;
+}
