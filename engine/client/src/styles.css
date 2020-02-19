@@ -1,4 +1,11 @@
 /**
+ * Global Styles
+ */
+html, body {
+  overflow: hidden;
+}
+
+/**
  * Launch Screen
  */
  
