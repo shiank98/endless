@@ -2,6 +2,13 @@
 
 <div class="main-menu">
   <button class="btn btn-1 create-account"></button>
-  <button class="btn btn-1 play-game"></button>
+  <button (click)="showPanel('play-game')" class="btn btn-1 play-game"></button>
   <button class="btn btn-1 view-credits"></button>
+</div>
+
+<div *ngIf="activePanel === 'play-game'" class="play-game-panel">
+  <div class="buttons">
+    <button class="btn btn-2 connect"></button>
+    <button (click)="hideActivePanel()" class="btn btn-2 cancel"></button>
+  </div>
 </div>

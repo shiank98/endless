@@ -42,18 +42,29 @@ launch-menu-screen .main-menu {
   left: 4%;
 }
 
-/* A main menu screen button */
-launch-menu-screen .btn {
-  display: block;
+/* Main menu screen buttons */
+launch-menu-screen .btn-1 {
+  display: block !important;
   width: 180px;
   height: 40px;
   zoom: 1.8;
 }
 
-/* Shift the button background when hovered */
-launch-menu-screen .btn:hover,
-launch-menu-screen .btn:focus {
+launch-menu-screen .btn-2 {
+  width: 120px;
+  height: 40px;
+  zoom: 0.8;
+}
+
+/* Shift the button backgrounds when hovered */
+launch-menu-screen .btn-1:hover,
+launch-menu-screen .btn-1:focus {
   background-position: 0px 200px;
+}
+
+launch-menu-screen .btn-2:hover,
+launch-menu-screen .btn-2:focus {
+  background-position: 120px 0px;
 }
 
 /* Main menu screen buttons */
@@ -67,4 +78,31 @@ launch-menu-screen .play-game {
 
 launch-menu-screen .view-credits {
   background-image: url("assets/ui/launch/buttons/view-credits.png");
+}
+
+launch-menu-screen .connect {
+  background-image: url("assets/ui/launch/buttons/connect.png");
+}
+
+launch-menu-screen .cancel {
+  background-image: url("assets/ui/launch/buttons/cancel.png");
+}
+
+/* This panel shows the play game login controls */
+launch-menu-screen .play-game-panel {
+  width: 320px;
+  height: 159px;
+  display: block;
+  position: absolute;
+  right: 10%;
+  bottom: 10%;
+  background-image: url(assets/ui/launch/panels/play-game.bmp);
+  zoom: 1.6;
+}
+
+/* Container for the play game panel buttons */
+launch-menu-screen .play-game-panel .buttons {
+  position: absolute;
+  right: 10%;
+  bottom: 10%;
 }

@@ -12,6 +12,16 @@ import { Component, OnInit } from '@angular/core';
 export class LaunchScreenComponent implements OnInit {
 
   /**
+   * Button type 1 sound effect
+   */
+  private sfxButton1 = new Audio('assets/sfx/button-click-1.wav');
+
+  /**
+   * String to keep track of which panel is active
+   */
+  private activePanel: string = '';
+
+  /**
    * Constructor
    */
   constructor() { }
@@ -41,15 +51,8 @@ export class LaunchScreenComponent implements OnInit {
       }
     });
 
-    // Load the button sounds
-    const buttonClick1 = new Audio('assets/sfx/button-click-1.wav');
-
-    // Load clicking sounds for buttons
-    document.querySelectorAll('launch-menu-screen .btn-1').forEach(e => {
-      e.addEventListener('click', e => {
-        buttonClick1.play();
-      });
-    });
+    // Load the button sound effects
+    this.loadButtonSFX();
 
     // Get a random background number from 1-7
     const bg = Math.floor(Math.random() * Math.ceil(7)) + 1;
@@ -68,5 +71,49 @@ export class LaunchScreenComponent implements OnInit {
 
     // Load up the random sprite
     hero['style']['backgroundImage'] = `url("assets/ui/launch/backgrounds/heros/${sprite}.png")`;
+  }
+
+  /**
+   * This function shows the specified panel
+   */
+  showPanel(id: string) : void {
+    this.activePanel = id;    
+    this.loadButtonSFX();
+  }
+
+  /**
+   * This function hides the active panel
+   */
+  hideActivePanel() : void {
+    this.activePanel = '';
+  }
+
+  /**
+   * Loads button sound effects adding event listeners
+   */
+  loadButtonSFX() : void {
+    
+    // Wait 50ms first to make sure the elements are rendered
+    setTimeout(() => {
+
+      // Load clicking sounds for buttons without SFX loaded
+      document.querySelectorAll('launch-menu-screen .btn-1, launch-menu-screen .btn-2')
+        .forEach((btn: any) => {
+
+          // This button has no SFX loadbtnd
+          if (! btn.loadedSFX) {
+
+            // Add the event listener
+            btn.addEventListener('click', () => {
+
+              // Play the SFX
+              this.sfxButton1.play();
+            });
+            
+            // Mark it as having loaded
+            btn.loadedSFX = true;
+          }
+        });
+    }, 50);
   }
 }
