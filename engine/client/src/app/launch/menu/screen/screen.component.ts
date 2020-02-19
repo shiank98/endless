@@ -21,6 +21,36 @@ export class LaunchScreenComponent implements OnInit {
    */
   ngOnInit() : void {
 
+    // Load the launch screen music
+    const music = new Audio('assets/mfx/launch-menu-screen.mp3');
+
+    // Set it to loop
+    music.loop = true;
+
+    // Set the volume to 75%
+    music.volume = 0.75;
+
+    // If the music isn't playing we need to play it (need to wait for user interaction first) 
+    document.querySelector('launch-menu-screen').addEventListener('mousemove', e => {
+      
+      // No music is playing and we have an interaction
+      if (music.paused) {
+
+        // Play the music
+        music.play();
+      }
+    });
+
+    // Load the button sounds
+    const buttonClick1 = new Audio('assets/sfx/button-click-1.wav');
+
+    // Load clicking sounds for buttons
+    document.querySelectorAll('launch-menu-screen .btn-1').forEach(e => {
+      e.addEventListener('click', e => {
+        buttonClick1.play();
+      });
+    });
+
     // Get a random background number from 1-7
     const bg = Math.floor(Math.random() * Math.ceil(7)) + 1;
 

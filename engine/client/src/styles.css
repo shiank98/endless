@@ -5,6 +5,11 @@ html, body {
   overflow: hidden;
 }
 
+.btn {
+  box-shadow: none !important;
+  border: none !important;
+}
+
 /**
  * Launch Screen
  */
@@ -28,4 +33,38 @@ launch-menu-screen .hero {
   background-size: contain;
   background-position: center bottom;
   background-repeat: no-repeat;
+}
+
+/* Container for the main menu buttons */
+launch-menu-screen .main-menu {
+  position: absolute;
+  bottom: 10%;
+  left: 4%;
+}
+
+/* A main menu screen button */
+launch-menu-screen .btn {
+  display: block;
+  width: 180px;
+  height: 40px;
+  zoom: 1.8;
+}
+
+/* Shift the button background when hovered */
+launch-menu-screen .btn:hover,
+launch-menu-screen .btn:focus {
+  background-position: 0px 200px;
+}
+
+/* Main menu screen buttons */
+launch-menu-screen .create-account {
+  background-image: url("assets/ui/launch/buttons/create-account.png");
+}
+
+launch-menu-screen .play-game {
+  background-image: url("assets/ui/launch/buttons/play-game.png");
+}
+
+launch-menu-screen .view-credits {
+  background-image: url("assets/ui/launch/buttons/view-credits.png");
 }
