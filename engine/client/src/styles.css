@@ -24,6 +24,11 @@ html, body {
   border: none !important;
 }
 
+::selection {
+  background: #7d5521;
+  color: lightgoldenrodyellow;
+}
+
 /**
  * Launch Screen
  */
@@ -135,6 +140,7 @@ launch-menu-screen .play-game-panel input {
   box-shadow: 1px 1px 1px 0px inset #845d2e;
   color: #1b1b1b;
   position: absolute;
+  caret-color: #7d5521;
 }
 
 /* Game game (login) inputs positioning */
