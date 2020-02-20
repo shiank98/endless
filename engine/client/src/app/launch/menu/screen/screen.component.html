@@ -3,13 +3,13 @@
 
 <!-- Displays the main menu -->
 <div class="main-menu">
-  <button class="btn btn-1 create-account"></button>
+  <button (click)="hideActivePanel(); showNoServer()" class="btn btn-1 create-account"></button>
   <button (click)="showPanel('play-game')" class="btn btn-1 play-game"></button>
-  <button class="btn btn-1 view-credits"></button>
+  <button (click)="showCredits()" class="btn btn-1 view-credits"></button>
 </div>
 
 <!-- Displays the play game menu (login) panel -->
-<div *ngIf="activePanel === 'play-game'" class="play-game-panel">
+<div [ngClass]="{ 'invisible': (activePanel !== 'play-game') }" class="play-game-panel">
 
   <!-- Username and password input -->
   <input class="input-user" spellcheck="false">
@@ -17,7 +17,20 @@
 
   <!-- Panel buttons -->
   <div class="buttons">
-    <button class="btn btn-2 connect"></button>
+    <button (click)="showNoServer()" class="btn btn-2 connect"></button>
     <button (click)="hideActivePanel()" class="btn btn-2 cancel"></button>
   </div>
+</div>
+
+<!-- Displays a note to the user -->
+<div [ngClass]="{ 'invisible': (! activeNote) }" class="note-panel">
+
+  <!-- Note title text -->
+  <div class="title-text">{{ this.activeNote.title }}</div>
+
+  <!-- Note message text -->
+  <div class="title-message">{{ this.activeNote.message }}</div>
+
+  <!-- Okay button to close the note panel -->
+  <button (click)="clearNote()" class="btn btn-3 ok"></button>
 </div>

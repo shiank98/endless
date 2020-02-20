@@ -17,9 +17,19 @@ export class LaunchScreenComponent implements OnInit {
   private sfxButton1 = new Audio('assets/sfx/button-click-1.wav');
 
   /**
+   * Button type 2 sound effect
+   */
+  private sfxButton2 = new Audio('assets/sfx/button-click-2.wav');
+
+  /**
    * String to keep track of which panel is active
    */
   private activePanel: string = '';
+
+  /**
+   * Object to store the active note being showed to the user, null when inactive
+   */
+  private activeNote: any = null;
 
   /**
    * Constructor
@@ -78,7 +88,6 @@ export class LaunchScreenComponent implements OnInit {
    */
   showPanel(id: string) : void {
     this.activePanel = id;    
-    this.loadButtonSFX();
   }
 
   /**
@@ -89,6 +98,40 @@ export class LaunchScreenComponent implements OnInit {
   }
 
   /**
+   * This function shows the user a note
+   */
+  showNote(title: string, message: string) : void {
+    this.activeNote = { title, message };    
+  }
+
+  /**
+   * This function clears the active note
+   */
+  clearNote() : void {
+    this.activeNote = null;
+  }
+
+  /**
+   * Lets the user know the server cannot be found
+   */
+  showNoServer() : void {
+    this.showNote(
+      "Could not find server", 
+      "The game server could not be found, please try again at a later time."
+    );    
+  }
+
+  /**
+   * Shows the user who created the game
+   */
+  showCredits() : void {
+    this.showNote(
+      "Game Credits", 
+      "Original Version: Vult-r, Arvid, Teror, Laine, Sakura, DwD, Chaos. Rewritten Version: Hyp6xia, MrCook."
+    );
+  }
+
+  /**
    * Loads button sound effects adding event listeners
    */
   loadButtonSFX() : void {
@@ -96,7 +139,7 @@ export class LaunchScreenComponent implements OnInit {
     // Wait 50ms first to make sure the elements are rendered
     setTimeout(() => {
 
-      // Load clicking sounds for buttons without SFX loaded
+      // Load clicking sounds for buttons without button 1 SFX loaded
       document.querySelectorAll('launch-menu-screen .btn-1, launch-menu-screen .btn-2')
         .forEach((btn: any) => {
 
@@ -108,6 +151,25 @@ export class LaunchScreenComponent implements OnInit {
 
               // Play the SFX
               this.sfxButton1.play();
+            });
+            
+            // Mark it as having loaded
+            btn.loadedSFX = true;
+          }
+        });
+
+      // Load clicking sounds for buttons without button 2 SFX loaded
+      document.querySelectorAll('launch-menu-screen .btn-3')
+        .forEach((btn: any) => {
+
+          // This button has no SFX loadbtnd
+          if (! btn.loadedSFX) {
+
+            // Add the event listener
+            btn.addEventListener('click', () => {
+
+              // Play the SFX
+              this.sfxButton2.play();
             });
             
             // Mark it as having loaded

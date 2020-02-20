@@ -75,6 +75,11 @@ launch-menu-screen .btn-2 {
   zoom: 0.8;
 }
 
+launch-menu-screen .btn-3 {
+  width: 91px;
+  height: 29px;
+}
+
 /* Shift the button backgrounds when hovered */
 launch-menu-screen .btn-1:hover,
 launch-menu-screen .btn-1:focus {
@@ -84,6 +89,11 @@ launch-menu-screen .btn-1:focus {
 launch-menu-screen .btn-2:hover,
 launch-menu-screen .btn-2:focus {
   background-position: 120px 0px;
+}
+
+launch-menu-screen .btn-3:hover,
+launch-menu-screen .btn-3:focus {
+  background-position: 91px 0px;
 }
 
 /* Main menu screen buttons */
@@ -105,6 +115,10 @@ launch-menu-screen .connect {
 
 launch-menu-screen .cancel {
   background-image: url("assets/ui/launch/buttons/cancel.png");
+}
+
+launch-menu-screen .ok {
+  background-image: url("assets/ui/launch/buttons/ok.png");
 }
 
 /* This panel shows the play game login controls */
@@ -152,4 +166,44 @@ launch-menu-screen .play-game-panel .input-user {
 launch-menu-screen .play-game-panel .input-pass {
   right: 10%;
   top: 46%;
+}
+
+/* This panel shows a note to the user */
+launch-menu-screen .note-panel {
+  width: 290px;
+  height: 157px;
+  display: block;
+  position: absolute;
+  right: calc(50% - 145px);
+  bottom: calc(50% - 78px);
+  background-image: url(assets/ui/launch/panels/note.bmp);
+  zoom: 1.6;
+}
+
+/* Note title text display */
+launch-menu-screen .note-panel .title-text {
+  font-family: "launch-menu";
+  font-size: 18px;
+  color: #eeeec5;
+  position: absolute;
+  top: 12%;
+  left: 25%;
+}
+
+/* Note title message display */
+launch-menu-screen .note-panel .title-message {
+  font-family: "launch-menu";
+  font-size: 18px;
+  line-height: 17px;
+  color: #eeeec5;
+  position: absolute;
+  top: 40%;
+  left: 6%;
+}
+
+/* Note panel button positioning */
+launch-menu-screen .note-panel .btn {
+  position: absolute;
+  right: 6%;
+  bottom: 10%;
 }
