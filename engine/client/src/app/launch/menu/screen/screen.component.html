@@ -1,12 +1,21 @@
+<!-- This displays the active hero image -->
 <div class="hero"></div>
 
+<!-- Displays the main menu -->
 <div class="main-menu">
   <button class="btn btn-1 create-account"></button>
   <button (click)="showPanel('play-game')" class="btn btn-1 play-game"></button>
   <button class="btn btn-1 view-credits"></button>
 </div>
 
+<!-- Displays the play game menu (login) panel -->
 <div *ngIf="activePanel === 'play-game'" class="play-game-panel">
+
+  <!-- Username and password input -->
+  <input class="input-user" spellcheck="false">
+  <input type="password" class="input-pass">
+
+  <!-- Panel buttons -->
   <div class="buttons">
     <button class="btn btn-2 connect"></button>
     <button (click)="hideActivePanel()" class="btn btn-2 cancel"></button>

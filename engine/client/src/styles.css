@@ -1,4 +1,18 @@
 /**
+ * Fonts
+ */
+
+/* Coder's Crux */
+@font-face {
+  font-family: "launch-menu";
+  src: url("assets/fonts/launch-menu/launch-menu.eot");
+  src: url("assets/fonts/launch-menu/launch-menu.eot?#iefix") format("embedded-opentype"),
+  url("assets/fonts/launch-menu/launch-menu.woff2") format("woff2"),
+  url("assets/fonts/launch-menu/launch-menu.woff") format("woff"),
+  url("assets/fonts/launch-menu/launch-menu.ttf") format("truetype");
+}
+
+/**
  * Global Styles
  */
 html, body {
@@ -105,4 +119,31 @@ launch-menu-screen .play-game-panel .buttons {
   position: absolute;
   right: 10%;
   bottom: 10%;
+}
+
+/* Input control styling for the launch screen panel */
+launch-menu-screen .play-game-panel input {
+  background: #a58169;
+  font-size: 16px;
+  padding: 1px 5px 0px;
+  border: 1px solid #3e311d;
+  border-radius: 2px;
+  outline: none;
+  display: block;
+  font-family: "launch-menu", sans-serif;
+  line-height: 17px;
+  box-shadow: 1px 1px 1px 0px inset #845d2e;
+  color: #1b1b1b;
+  position: absolute;
+}
+
+/* Game game (login) inputs positioning */
+launch-menu-screen .play-game-panel .input-user {
+  right: 10%;
+  top: 23%;
+}
+
+launch-menu-screen .play-game-panel .input-pass {
+  right: 10%;
+  top: 46%;
 }
