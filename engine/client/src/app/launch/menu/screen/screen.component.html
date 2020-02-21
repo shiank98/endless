@@ -1,9 +1,9 @@
 <!-- This displays the active hero image -->
-<div class="hero"></div>
+<div [ngClass]="{ 'shift-left': (activePanel === 'create-account') }" class="hero"></div>
 
 <!-- Displays the main menu -->
-<div class="main-menu">
-  <button (click)="hideActivePanel(); showNoServer()" class="btn btn-1 create-account"></button>
+<div [ngClass]="{ 'invisible': (activePanel === 'create-account') }" class="main-menu">
+  <button (click)="loadHeroImage(); showPanel('create-account')" class="btn btn-1 create-account"></button>
   <button (click)="showPanel('play-game')" class="btn btn-1 play-game"></button>
   <button (click)="showCredits()" class="btn btn-1 view-credits"></button>
 </div>
@@ -22,14 +22,51 @@
   </div>
 </div>
 
+<!-- Displays the create account panel -->
+<div [ngClass]="{ 'invisible': (activePanel !== 'create-account') }" class="create-account-panel">
+
+  <!-- Account Name -->
+  <img src="assets/ui/launch/labels/account-name.png">
+  <input class="input-account-name" spellcheck="false">
+
+  <!-- Password -->
+  <img src="assets/ui/launch/labels/password.png">
+  <input class="input-password" type="password">
+
+  <!-- Type Password Again -->
+  <img src="assets/ui/launch/labels/type-password-again.png">
+  <input class="input-type-password-again" type="password">
+
+  <!-- Form Spacer -->
+  <div class="form-spacer"></div>
+
+  <!-- Real Name -->
+  <img src="assets/ui/launch/labels/real-name.png">
+  <input class="input-real-name" spellcheck="false">
+
+  <!-- County or Location -->
+  <img src="assets/ui/launch/labels/county-or-location.png">
+  <input class="input-county-or-location" spellcheck="false">
+
+  <!-- Email -->
+  <img src="assets/ui/launch/labels/email.png">
+  <input class="input-email" spellcheck="false">
+
+  <!-- Panel buttons -->
+  <div class="buttons">
+    <button (click)="createAccount();" class="btn btn-2 create mr-3"></button>
+    <button (click)="loadHeroImage(); hideActivePanel()" class="btn btn-2 cancel"></button>
+  </div>
+</div>
+
 <!-- Displays a note to the user -->
 <div [ngClass]="{ 'invisible': (! activeNote) }" class="note-panel">
 
   <!-- Note title text -->
-  <div class="title-text">{{ this.activeNote.title }}</div>
+  <div *ngIf="this.activeNote" class="title-text">{{ this.activeNote.title }}</div>
 
   <!-- Note message text -->
-  <div class="title-message">{{ this.activeNote.message }}</div>
+  <div *ngIf="this.activeNote" class="title-message">{{ this.activeNote.message }}</div>
 
   <!-- Okay button to close the note panel -->
   <button (click)="clearNote()" class="btn btn-3 ok"></button>

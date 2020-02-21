@@ -64,6 +64,25 @@ export class LaunchScreenComponent implements OnInit {
     // Load the button sound effects
     this.loadButtonSFX();
 
+    // Load the background image
+    this.loadBackgroundImage();
+
+    // Load the hero image
+    this.loadHeroImage();
+  }
+
+  /**
+   * This function shows the specified panel
+   */
+  showPanel(id: string) : void {
+    this.activePanel = id;    
+  }
+
+  /**
+   * Load a randomly chosen background image
+   */
+  loadBackgroundImage() {
+
     // Get a random background number from 1-7
     const bg = Math.floor(Math.random() * Math.ceil(7)) + 1;
 
@@ -72,22 +91,31 @@ export class LaunchScreenComponent implements OnInit {
 
     // Load up the random background
     lms['style']['backgroundImage'] = `url("assets/ui/launch/backgrounds/${bg}.bmp")`;
-
-    // Get a random hero sprite number from 1-12
-    const sprite = Math.floor(Math.random() * Math.ceil(12)) + 1;
+  }
+  
+  /**
+   * Load a randomly chosen hero sprite image
+   */
+  loadHeroImage() : void {
 
     // Get the hero element
     let hero = document.querySelector('launch-menu-screen .hero');
 
+    // If we have a hero sprite image already loaded get the file name number
+    const currentHero = hero['style']['backgroundImage'] ? (
+      parseInt(hero['style']['backgroundImage'].match(/(\d+)/g)[0])
+    ) : null;
+    
+    // Get a random hero sprite number from 1-12
+    const sprite = Math.floor(Math.random() * Math.ceil(12)) + 1;
+
+    // Got the same hero as the current one so run again
+    if (sprite === currentHero) {
+      this.loadHeroImage(); return;
+    }
+
     // Load up the random sprite
     hero['style']['backgroundImage'] = `url("assets/ui/launch/backgrounds/heros/${sprite}.png")`;
-  }
-
-  /**
-   * This function shows the specified panel
-   */
-  showPanel(id: string) : void {
-    this.activePanel = id;    
   }
 
   /**
@@ -118,6 +146,16 @@ export class LaunchScreenComponent implements OnInit {
     this.showNote(
       "Could not find server", 
       "The game server could not be found, please try again at a later time."
+    );    
+  }
+
+  /**
+   * Checks the create account form details
+   */
+  createAccount() : void {
+    this.showNote(
+      "Wrong input", 
+      "Some of the fields are still empty. Fill in all the fields and try again."
     );    
   }
 

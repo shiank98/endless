@@ -41,6 +41,23 @@ launch-menu-screen {
   background-size: 100% 100%;
 }
 
+/* Input control styling for the launch screen inputs */
+launch-menu-screen input {
+  background: #a58169;
+  font-size: 16px;
+  padding: 1px 5px 0px;
+  border: 1px solid #3e311d;
+  border-radius: 2px;
+  outline: none;
+  display: block;
+  font-family: "launch-menu", sans-serif;
+  line-height: 17px;
+  box-shadow: 1px 1px 1px 0px inset #845d2e;
+  color: #1b1b1b;
+  position: absolute;
+  caret-color: #7d5521;
+}
+
 /* A random hero sprite image is set by the launch screen component */
 launch-menu-screen .hero {
   display: block;
@@ -52,6 +69,13 @@ launch-menu-screen .hero {
   background-size: contain;
   background-position: center bottom;
   background-repeat: no-repeat;
+}
+
+/* The hero sprite image is shifted left if registering */
+launch-menu-screen .hero.shift-left {
+  right: unset;
+  left: 5%;
+  height: 65%;
 }
 
 /* Container for the main menu buttons */
@@ -121,6 +145,10 @@ launch-menu-screen .ok {
   background-image: url("assets/ui/launch/buttons/ok.png");
 }
 
+launch-menu-screen .create {
+  background-image: url("assets/ui/launch/buttons/create.png");
+}
+
 /* This panel shows the play game login controls */
 launch-menu-screen .play-game-panel {
   width: 320px;
@@ -140,23 +168,6 @@ launch-menu-screen .play-game-panel .buttons {
   bottom: 10%;
 }
 
-/* Input control styling for the launch screen panel */
-launch-menu-screen .play-game-panel input {
-  background: #a58169;
-  font-size: 16px;
-  padding: 1px 5px 0px;
-  border: 1px solid #3e311d;
-  border-radius: 2px;
-  outline: none;
-  display: block;
-  font-family: "launch-menu", sans-serif;
-  line-height: 17px;
-  box-shadow: 1px 1px 1px 0px inset #845d2e;
-  color: #1b1b1b;
-  position: absolute;
-  caret-color: #7d5521;
-}
-
 /* Game game (login) inputs positioning */
 launch-menu-screen .play-game-panel .input-user {
   right: 10%;
@@ -166,6 +177,36 @@ launch-menu-screen .play-game-panel .input-user {
 launch-menu-screen .play-game-panel .input-pass {
   right: 10%;
   top: 46%;
+}
+
+/* This panel shows the create account controls */
+launch-menu-screen .create-account-panel {
+  width: 40%;
+  height: 80%;
+  display: block;
+  position: absolute;
+  right: 5%;
+  top: 5%;
+  zoom: 1.6;
+  background: none;
+}
+
+/* Create account panel inputs are full-width */
+launch-menu-screen .create-account-panel input {
+  width: 100%;
+  position: unset;
+}
+
+/* Spacer to separate the two sections of the create account panel */
+launch-menu-screen .create-account-panel .form-spacer {
+  margin-top: 5%;
+}
+
+/* Container for the create account panel buttons */
+launch-menu-screen .create-account-panel .buttons {
+  position: fixed;
+  right: 5%;
+  bottom: 5%;
 }
 
 /* This panel shows a note to the user */
