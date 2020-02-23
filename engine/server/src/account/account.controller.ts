@@ -20,7 +20,7 @@ export class AccountController {
   
   /**
    * Used for accepting requests for account creation
-   * @param data - received data from the request
+   * @param {CreateAccountDTO} dto - data transfer object containing account info
    */
   @Post()
   @HttpCode(201)
