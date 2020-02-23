@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AccountService } from '../../../services/account.service';
 
 /**
  * Launch screen component
@@ -34,7 +35,9 @@ export class LaunchScreenComponent implements OnInit {
   /**
    * Constructor
    */
-  constructor() { }
+  constructor(
+    private accountService: AccountService
+  ) { }
   
   /**
    * Initialisation function used for loading a random background/hero image
@@ -75,7 +78,7 @@ export class LaunchScreenComponent implements OnInit {
    * This function shows the specified panel
    */
   showPanel(id: string) : void {
-    this.activePanel = id;    
+    this.activePanel = id;
   }
 
   /**
@@ -153,10 +156,51 @@ export class LaunchScreenComponent implements OnInit {
    * Checks the create account form details
    */
   createAccount() : void {
-    this.showNote(
-      "Wrong input", 
-      "Some of the fields are still empty. Fill in all the fields and try again."
-    );    
+
+    // Get the create account panel
+    const createAccountPanel: HTMLElement = document.querySelector('.create-account-panel');
+
+    // Get the create account form fields
+    const accountName: HTMLInputElement = createAccountPanel.querySelector('.input-account-name');
+    const password: HTMLInputElement = createAccountPanel.querySelector('.input-password');
+    const passwordAgain: HTMLInputElement = createAccountPanel.querySelector('.input-type-password-again');
+    const realName: HTMLInputElement = createAccountPanel.querySelector('.input-real-name');
+    const countyOrLocation: HTMLInputElement = createAccountPanel.querySelector('.input-county-or-location');
+    const email: HTMLInputElement = createAccountPanel.querySelector('.input-email');
+
+    // Get the information for account creation provided by the user
+    const accountInfo = {
+      'accountName': accountName.value,
+      'password': password.value,
+      'passwordAgain': passwordAgain.value,
+      'realName': realName.value,
+      'countyOrLocation': countyOrLocation.value,
+      'email': email.value
+    };
+
+    // Check to make sure we haven't got wrong input
+    const wrongInput = (
+      ! accountInfo.accountName || 
+      ! accountInfo.password || 
+      ! accountInfo.passwordAgain || 
+      ! accountInfo.realName || 
+      ! accountInfo.countyOrLocation ||
+      ! accountInfo.email
+    ) ? true : false;
+
+    // Stop here: We have wrong input
+    if (wrongInput) {
+      this.showNote(
+        "Wrong input", 
+        "Some of the fields are still empty. Fill in all the fields and try again."
+      );
+
+      // Stop here
+      return;
+    }
+
+    // We have correct input so send the account info to the server via the account service
+    this.accountService.create(accountInfo);
   }
 
   /**

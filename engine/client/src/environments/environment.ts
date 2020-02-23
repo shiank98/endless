@@ -5,8 +5,9 @@
 /**
  * Development environment config
  */
-export const environment = {
-  production: false
+export const env = {
+  production: false,
+  server: 'http://localhost:3000'
 };
 
 /*

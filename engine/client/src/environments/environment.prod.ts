@@ -1,6 +1,6 @@
 /**
  * Production environment config
  */
-export const environment = {
+export const env = {
   production: true
 };
