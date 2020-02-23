@@ -1,0 +1,45 @@
+{
+	"info": {
+		"_postman_id": "4b07ec13-d33a-4d26-aa96-a25c7722daad",
+		"name": "endless",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "account",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"accountName\": \"johnDoe\",\n  \"password\": \"123456\",\n  \"realName\": \"John Doe\",\n  \"countyOrLocation\": \"United Kingdom\",\n  \"email\": \"john@doe.com\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/account",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"account"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
