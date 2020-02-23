@@ -120,6 +120,11 @@ launch-menu-screen .btn-3:focus {
   background-position: 91px 0px;
 }
 
+launch-menu-screen .back-corner:hover,
+launch-menu-screen .back-corner:focus {
+  background-position: 0px 100%;
+}
+
 /* Main menu screen buttons */
 launch-menu-screen .create-account {
   background-image: url("assets/ui/launch/buttons/create-account.png");
@@ -147,6 +152,17 @@ launch-menu-screen .ok {
 
 launch-menu-screen .create {
   background-image: url("assets/ui/launch/buttons/create.png");
+}
+
+launch-menu-screen .back-corner {
+  background-image: url("assets/ui/launch/buttons/back-corner.png");
+  background-clip: padding-box;
+  background-size: 100% 200%;
+  width: 8.1%;
+  height: 11%;
+  position: fixed;
+  right: 0px;
+  top: 0px;
 }
 
 /* This panel shows the play game login controls */

@@ -122,9 +122,35 @@ export class LaunchScreenComponent implements OnInit {
   }
 
   /**
+   * This function clears the create account form
+   */
+  clearCreateAccountForm() : void {
+    
+    // Get the create account panel
+    const createAccountPanel: HTMLElement = document.querySelector('.create-account-panel');
+
+    // Get the create account form fields
+    const accountName: HTMLInputElement = createAccountPanel.querySelector('.input-account-name');
+    const password: HTMLInputElement = createAccountPanel.querySelector('.input-password');
+    const passwordAgain: HTMLInputElement = createAccountPanel.querySelector('.input-type-password-again');
+    const realName: HTMLInputElement = createAccountPanel.querySelector('.input-real-name');
+    const countyOrLocation: HTMLInputElement = createAccountPanel.querySelector('.input-county-or-location');
+    const email: HTMLInputElement = createAccountPanel.querySelector('.input-email');
+
+    // Clear the values
+    accountName.value = password.value = passwordAgain.value = realName.value = countyOrLocation.value = email.value = '';
+  }
+
+  /**
    * This function hides the active panel
    */
   hideActivePanel() : void {
+
+    // If we were on the create account panel clear the form
+    if (this.activePanel === 'create-account') {
+      this.clearCreateAccountForm();
+    }
+    
     this.activePanel = '';
   }
 
@@ -188,12 +214,54 @@ export class LaunchScreenComponent implements OnInit {
       ! accountInfo.email
     ) ? true : false;
 
-    // Stop here: We have wrong input
+    // Stop here: Wrong input
     if (wrongInput) {
       this.showNote(
         "Wrong input", 
         "Some of the fields are still empty. Fill in all the fields and try again."
       );
+
+      // Stop here
+      return;
+    }
+
+    // Stop here: Wrong email
+    if (accountInfo.email.indexOf('@') < 0 || accountInfo.email.indexOf('@') > accountInfo.email.lastIndexOf('.')) {
+      this.showNote(
+        "Wrong input", 
+        "Enter a valid email address."
+      );
+
+      // Clear the email
+      email.value = '';
+
+      // Stop here
+      return;
+    }
+
+    // Stop here: Wrong password length
+    if (accountInfo.password.length < 6) {
+      this.showNote(
+        "Wrong password", 
+        "For your own safety use a longer password (try 6 or more characters)."
+      );
+
+      // Clear the passwords
+      password.value = passwordAgain.value = '';
+
+      // Stop here
+      return;
+    }
+
+    // Stop here: Wrong password match
+    if (accountInfo.password !== accountInfo.passwordAgain) {
+      this.showNote(
+        "Wrong password", 
+        "The two passwords you provided are not the same, please try again."
+      );
+
+      // Clear the passwords
+      password.value = passwordAgain.value = '';
 
       // Stop here
       return;
@@ -222,7 +290,7 @@ export class LaunchScreenComponent implements OnInit {
     setTimeout(() => {
 
       // Load clicking sounds for buttons without button 1 SFX loaded
-      document.querySelectorAll('launch-menu-screen .btn-1, launch-menu-screen .btn-2')
+      document.querySelectorAll('launch-menu-screen .btn-1, launch-menu-screen .btn-2, launch-menu-screen .back-corner')
         .forEach((btn: any) => {
 
           // This button has no SFX loadbtnd

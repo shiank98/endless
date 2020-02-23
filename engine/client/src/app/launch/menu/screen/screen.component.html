@@ -1,6 +1,9 @@
 <!-- This displays the active hero image -->
 <div [ngClass]="{ 'shift-left': (activePanel === 'create-account') }" class="hero"></div>
 
+<!-- Displays the back corner button -->
+<button (click)="hideActivePanel()" [ngClass]="{ 'invisible': (activePanel !== 'create-account') }" class="btn back-corner"></button>
+
 <!-- Displays the main menu -->
 <div [ngClass]="{ 'invisible': (activePanel === 'create-account') }" class="main-menu">
   <button (click)="loadHeroImage(); showPanel('create-account')" class="btn btn-1 create-account"></button>
