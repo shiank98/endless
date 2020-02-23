@@ -7,7 +7,6 @@
   font-family: "launch-menu";
   src: url("assets/fonts/launch-menu/launch-menu.eot");
   src: url("assets/fonts/launch-menu/launch-menu.eot?#iefix") format("embedded-opentype"),
-  url("assets/fonts/launch-menu/launch-menu.woff2") format("woff2"),
   url("assets/fonts/launch-menu/launch-menu.woff") format("woff"),
   url("assets/fonts/launch-menu/launch-menu.ttf") format("truetype");
 }
