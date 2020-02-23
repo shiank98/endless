@@ -33,6 +33,11 @@ export class LaunchScreenComponent implements OnInit {
   private activeNote: any = null;
 
   /**
+   * Stores the active timeout, allowing us to clear it prematurely
+   */
+  private activeTimer: any = null;
+
+  /**
    * Constructor
    */
   constructor(
@@ -157,14 +162,55 @@ export class LaunchScreenComponent implements OnInit {
   /**
    * This function shows the user a note
    */
-  showNote(title: string, message: string) : void {
-    this.activeNote = { title, message };    
+  showNote(title: string, message: string, timer?: number, callback?: Function) : void {
+    this.activeNote = { title, message, timer };
+
+    // We have a timer
+    if (timer) {
+
+      // Wait 50ms first to make sure the elements are rendered
+      setTimeout(() => {
+
+        // Initiate the progress bar
+        const bar: HTMLElement = document.querySelector('.note-panel .timer .bar');
+
+        bar.style.transitionDuration = `${timer}ms`;
+        bar.style.width = '100%';
+
+        // Set the active timer, it's callback and duration
+        this.activeTimer = setTimeout(() => {
+
+          // Clear the note
+          this.clearNote();
+          
+          // Fire the callback function
+          callback();
+        }, timer);
+      }, 50);
+    }
+  }
+
+  /**
+   * This function resets the timer bar
+   */
+  resetTimerBar() : void {
+    const bar: HTMLElement = document.querySelector('.note-panel .timer .bar');
+
+    bar.style.transitionDuration = null;
+    bar.style.width = '0%';
   }
 
   /**
    * This function clears the active note
    */
   clearNote() : void {
+
+    // Clear the timer if we have one
+    if (this.activeNote.timer) {
+      clearTimeout(this.activeTimer);
+      this.resetTimerBar();
+    }
+
     this.activeNote = null;
   }
 
@@ -267,8 +313,25 @@ export class LaunchScreenComponent implements OnInit {
       return;
     }
 
-    // We have correct input so send the account info to the server via the account service
-    this.accountService.create(accountInfo);
+    // Let the user know the account has been accepted, start the timer for account creation
+    this.showNote(
+      "Account accepted",
+      "Please wait a moment for creation.",
+      10000, () => {
+        
+        // We have correct input so send the account info to the server via the account service
+        this.accountService.create(accountInfo);
+
+        // Close the create account panel
+        this.hideActivePanel();
+
+        // Show them the welcome message
+        this.showNote(
+          "Welcome",
+          "Use your new account name and password to login to the game."
+        );
+      }
+    );
   }
 
   /**

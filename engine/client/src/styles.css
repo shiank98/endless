@@ -150,6 +150,10 @@ launch-menu-screen .ok {
   background-image: url("assets/ui/launch/buttons/ok.png");
 }
 
+launch-menu-screen .cancel-small {
+  background-image: url("assets/ui/launch/buttons/cancel-small.png");
+}
+
 launch-menu-screen .create {
   background-image: url("assets/ui/launch/buttons/create.png");
 }
@@ -254,8 +258,30 @@ launch-menu-screen .note-panel .title-message {
   line-height: 17px;
   color: #eeeec5;
   position: absolute;
+  width: 88%;
   top: 40%;
   left: 6%;
+}
+
+/* Note timer display */
+launch-menu-screen .timer {
+  background-image: url("assets/ui/launch/gui/timer.bmp");
+  position: absolute;
+  top: 55%;
+  left: 5%;
+  width: 260px;
+  height: 12px;
+  padding: 3px;
+}
+
+/* Note timer bar display */
+launch-menu-screen .timer .bar {
+  background-color: #b4dce6;
+  height: 6px;
+  width: 0%;
+  transition-property: width;
+  transition-timing-function: linear;
+  border-radius: 1px;
 }
 
 /* Note panel button positioning */

@@ -71,6 +71,14 @@
   <!-- Note message text -->
   <div *ngIf="this.activeNote" class="title-message">{{ this.activeNote.message }}</div>
 
-  <!-- Okay button to close the note panel -->
-  <button (click)="clearNote()" class="btn btn-3 ok"></button>
+  <!-- Note timer -->
+  <div *ngIf="this.activeNote && this.activeNote.timer" class="timer">
+    <div class="bar"></div>
+  </div>
+
+  <!-- Okay button to close the note panel (for un-timed notes) -->
+  <button *ngIf="this.activeNote && ! this.activeNote.timer" (click)="clearNote()" class="btn btn-3 ok"></button>
+
+  <!-- Cancel button to close the note panel (for timed notes) -->
+  <button *ngIf="this.activeNote && this.activeNote.timer" (click)="clearNote()" class="btn btn-3 cancel-small"></button>
 </div>

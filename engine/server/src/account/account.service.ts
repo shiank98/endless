@@ -30,7 +30,7 @@ export class AccountService {
    * @version 1.0.0
    * @param {CreateAccountDTO} dto - data transfer object containing account info.
    */
-  async create(dto: CreateAccountDTO) : Promise<string> {
+  async create(dto: CreateAccountDTO) : Promise<any> {
 
     // Add one-way encryption to their password using bcrypt
     dto.password = bcrypt.hashSync(dto.password, bcrypt.genSaltSync());

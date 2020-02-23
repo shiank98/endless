@@ -24,7 +24,7 @@ export class AccountController {
    */
   @Post()
   @HttpCode(201)
-  async createAccount(@Body() dto: CreateAccountDTO) : Promise<string> {
+  async createAccount(@Body() dto: CreateAccountDTO) : Promise<any> {
 
     // Return the ID of the account having awaited it's creation
     return await this.accountService.create(dto);
