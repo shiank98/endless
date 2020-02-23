@@ -3,6 +3,8 @@ import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { CreateAccountDTO } from './account.dto';
 
+import * as bcrypt from 'bcryptjs';
+
 /**
  * The account type declaration.
  */
@@ -28,7 +30,15 @@ export class AccountService {
    * @version 1.0.0
    * @param {CreateAccountDTO} dto - data transfer object containing account info.
    */
-  async create(dto: CreateAccountDTO) {
-    return await new this.model(dto).save();
+  async create(dto: CreateAccountDTO) : Promise<string> {
+
+    // Add one-way encryption to their password using bcrypt
+    dto.password = bcrypt.hashSync(dto.password, bcrypt.genSaltSync());
+
+    // Create the new account
+    const account = await new this.model(dto).save();
+
+    // Return the ID of the created account
+    return account._id;
   }
 }
