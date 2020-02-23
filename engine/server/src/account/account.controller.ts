@@ -12,15 +12,15 @@ export class AccountController {
   /**
    * Account controller constructor.
    * @version 1.0.0
-   * @param {AccountService} accountService - Account service interfacing the database
+   * @param {AccountService} accountService - Account service interfacing the database.
    */
   constructor(
     private readonly accountService: AccountService
   ) {}
   
   /**
-   * Used for accepting requests for account creation
-   * @param {CreateAccountDTO} dto - data transfer object containing account info
+   * Used for accepting requests for account creation.
+   * @param {CreateAccountDTO} dto - data transfer object containing account info.
    */
   @Post()
   @HttpCode(201)

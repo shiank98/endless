@@ -26,7 +26,7 @@ export class AccountService {
   /**
    * Create an account and save it to the database.
    * @version 1.0.0
-   * @param {Object} data - The data for the account being created.
+   * @param {CreateAccountDTO} dto - data transfer object containing account info.
    */
   async create(dto: CreateAccountDTO) {
     return await new this.model(dto).save();
