@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { AccountService } from '../../../services/account.service';
 
 /**
- * Launch screen component
- * @todo Need to place the list of available backgrounds and sprites in a config 
+ * Launch screen component.
+ * @todo Need to place the list of available backgrounds and sprites in a config .
  */
 @Component({
   selector: 'launch-menu-screen',
@@ -13,39 +13,40 @@ import { AccountService } from '../../../services/account.service';
 export class LaunchScreenComponent implements OnInit {
 
   /**
-   * Button type 1 sound effect
+   * Button type 1 sound effect.
    */
   private sfxButton1 = new Audio('assets/sfx/button-click-1.wav');
 
   /**
-   * Button type 2 sound effect
+   * Button type 2 sound effect.
    */
   private sfxButton2 = new Audio('assets/sfx/button-click-2.wav');
 
   /**
-   * String to keep track of which panel is active
+   * String to keep track of which panel is active.
    */
   private activePanel: string = '';
 
   /**
-   * Object to store the active note being showed to the user, null when inactive
+   * Object to store the active note being showed to the user, null when inactive.
    */
   private activeNote: any = null;
 
   /**
-   * Stores the active timeout, allowing us to clear it prematurely
+   * Stores the active timeout, allowing us to clear it prematurely.
    */
   private activeTimer: any = null;
 
   /**
-   * Constructor
+   * The account service constructor.
+   * @param {AccountServer} accountService - The account service used for account creation.
    */
   constructor(
     private accountService: AccountService
   ) { }
   
   /**
-   * Initialisation function used for loading a random background/hero image
+   * Initialisation function used for loading a random background/hero image.
    */
   ngOnInit() : void {
 
@@ -80,14 +81,15 @@ export class LaunchScreenComponent implements OnInit {
   }
 
   /**
-   * This function shows the specified panel
+   * This function shows the specified panel.
+   * @param {string} id - The ID of the panel to be shown.
    */
   showPanel(id: string) : void {
     this.activePanel = id;
   }
 
   /**
-   * Load a randomly chosen background image
+   * Load a randomly chosen background image.
    */
   loadBackgroundImage() {
 
@@ -102,7 +104,7 @@ export class LaunchScreenComponent implements OnInit {
   }
   
   /**
-   * Load a randomly chosen hero sprite image
+   * Load a randomly chosen hero sprite image.
    */
   loadHeroImage() : void {
 
@@ -127,7 +129,7 @@ export class LaunchScreenComponent implements OnInit {
   }
 
   /**
-   * This function clears the create account form
+   * This function clears the create account form.
    */
   clearCreateAccountForm() : void {
     
@@ -147,7 +149,7 @@ export class LaunchScreenComponent implements OnInit {
   }
 
   /**
-   * This function hides the active panel
+   * This function hides the active panel.
    */
   hideActivePanel() : void {
 
@@ -160,7 +162,11 @@ export class LaunchScreenComponent implements OnInit {
   }
 
   /**
-   * This function shows the user a note
+   * This function shows the user a note.
+   * @param {string} title - Text to be displayed as the note title.
+   * @param {string} message - Text to be displayed as the note message.
+   * @param {number} timer - OPTIONAL: The number of milliseconds the note and timer will be displayed for.
+   * @param {Function} callback - OPTIONAL: The callback function that runs once the timer has ended.
    */
   showNote(title: string, message: string, timer?: number, callback?: Function) : void {
     this.activeNote = { title, message, timer };
@@ -191,7 +197,7 @@ export class LaunchScreenComponent implements OnInit {
   }
 
   /**
-   * This function resets the timer bar
+   * This function resets the timer bar.
    */
   resetTimerBar() : void {
     const bar: HTMLElement = document.querySelector('.note-panel .timer .bar');
@@ -201,7 +207,7 @@ export class LaunchScreenComponent implements OnInit {
   }
 
   /**
-   * This function clears the active note
+   * This function clears the active note.
    */
   clearNote() : void {
 
@@ -215,7 +221,7 @@ export class LaunchScreenComponent implements OnInit {
   }
 
   /**
-   * Lets the user know the server cannot be found
+   * Lets the user know the server cannot be found.
    */
   showNoServer() : void {
     this.showNote(
@@ -225,7 +231,7 @@ export class LaunchScreenComponent implements OnInit {
   }
 
   /**
-   * Checks the create account form details
+   * Checks the create account form details.
    */
   createAccount() : void {
 
@@ -335,7 +341,7 @@ export class LaunchScreenComponent implements OnInit {
   }
 
   /**
-   * Shows the user who created the game
+   * Shows the user who created the game.
    */
   showCredits() : void {
     this.showNote(
@@ -345,7 +351,7 @@ export class LaunchScreenComponent implements OnInit {
   }
 
   /**
-   * Loads button sound effects adding event listeners
+   * Loads button sound effects adding event listeners.
    */
   loadButtonSFX() : void {
     
