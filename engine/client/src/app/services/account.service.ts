@@ -3,7 +3,9 @@ import { HttpClient } from '@angular/common/http';
 
 import { env } from '../../environments/environment';
 
-
+/**
+ * The account service used for interacting with the server.
+ */
 @Injectable({
   providedIn: 'root'
 })
