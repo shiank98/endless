@@ -39,7 +39,7 @@ export class LaunchScreenComponent implements OnInit {
     paragraphs: null,
 
     formattedParagraphs() {
-      return this.paragraphs.map(p => { return p.trim().replace(/(\t{2,99}|\s{2,99})/g, ' ') });
+      return this.paragraphs ? this.paragraphs.map(p => { return p.trim().replace(/(\t{2,99}|\s{2,99})/g, ' ') }) : null;
     }
   };
 
