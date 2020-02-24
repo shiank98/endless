@@ -69,7 +69,7 @@
   <div *ngIf="this.activeNote" class="title-text">{{ this.activeNote.title }}</div>
 
   <!-- Note message text -->
-  <div *ngIf="this.activeNote" class="title-message">{{ this.activeNote.message }}</div>
+  <div *ngIf="this.activeNote" class="message-text">{{ this.activeNote.message }}</div>
 
   <!-- Note timer -->
   <div *ngIf="this.activeNote && this.activeNote.timer" class="timer">
@@ -81,4 +81,16 @@
 
   <!-- Cancel button to close the note panel (for timed notes) -->
   <button *ngIf="this.activeNote && this.activeNote.timer" (click)="clearNote()" class="btn btn-3 cancel-small"></button>
+</div>
+
+<!-- Displays a read-me to the user -->
+<div [ngClass]="{ 'invisible': (! this.activeReadMe.paragraphs) }" class="read-me-panel">
+
+  <!-- Read-me message paragraphs -->
+  <div class="message-text">
+    <pre *ngFor="let paragraph of this.activeReadMe.formattedParagraphs()">{{paragraph}}</pre>
+  </div>
+
+  <!-- Okay button to close the read-me panel -->
+  <button (click)="clearReadMe()" class="btn btn-3 ok"></button>
 </div>

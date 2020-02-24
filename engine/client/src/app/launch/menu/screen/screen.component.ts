@@ -33,6 +33,17 @@ export class LaunchScreenComponent implements OnInit {
   private activeNote: any = null;
 
   /**
+   * Object to store the active read-me paragraphs being showed to the user and a format function.
+   */
+  private activeReadMe: any = {
+    paragraphs: null,
+
+    formattedParagraphs() {
+      return this.paragraphs.map(p => { return p.trim().replace(/(\t{2,99}|\s{2,99})/g, ' ') });
+    }
+  };
+
+  /**
    * Stores the active timeout, allowing us to clear it prematurely.
    */
   private activeTimer: any = null;
@@ -85,6 +96,24 @@ export class LaunchScreenComponent implements OnInit {
    * @param {string} id - The ID of the panel to be shown.
    */
   showPanel(id: string) : void {
+
+    // If were showing the create account panel show a read-me
+    if (id === 'create-account') {
+      this.showReadMe([
+        `It is very important that you enter your correct real name, location and email address when
+        creating an account. Our system will ask you to enter your real name and email address in
+        case you have forgotten your password.`,
+        
+        `A lot of players who forgot their password, and signed up using fake details, have been 
+        unsuccessful in gaining access to their account. So please do not make the same mistake; 
+        use real details to sign up for an account.`,
+  
+        `Your information will only be used for recovering lost passwords. Your privacy is important
+        to us.`
+      ]);
+    }
+
+    // Set the active panel ID
     this.activePanel = id;
   }
 
@@ -153,7 +182,7 @@ export class LaunchScreenComponent implements OnInit {
    */
   hideActivePanel() : void {
 
-    // If we were on the create account panel clear the form
+    // If we were on the create account panel clear the form and show a read-me
     if (this.activePanel === 'create-account') {
       this.clearCreateAccountForm();
     }
@@ -218,6 +247,27 @@ export class LaunchScreenComponent implements OnInit {
     }
 
     this.activeNote = null;
+  }
+
+  /**
+   * This function shows the user a read-me.
+   * @param {array} paragraphs - An array of paragraphs (strings) to load into the read-me.
+   */
+  showReadMe(paragraphs: string[]) : void {
+    this.activeReadMe.paragraphs = paragraphs;
+  }
+
+  /**
+   * This function clears the active read-me.
+   */
+  clearReadMe() : void {
+    this.activeReadMe.paragraphs = null;
+
+    // Get the message text element
+    const messageText: HTMLElement = document.querySelector('.read-me-panel .message-text');
+    
+    // Reset the scrolling
+    messageText.scrollTop = 0;
   }
 
   /**
