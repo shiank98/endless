@@ -34,7 +34,7 @@ export class AccountService {
    * @param {String} accountName - The account name.
    * @version 1.0.0
    */
-  async findOne(accountName): Promise<any> {
+  async findOne(accountName: string): Promise<any> {
     return await this.model.findOne({ accountName });
   }
 

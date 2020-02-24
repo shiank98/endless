@@ -1,4 +1,4 @@
-import { Controller, Post, Body, HttpCode, UnauthorizedException } from '@nestjs/common';
+import { Controller, Post, Body, HttpCode, UnauthorizedException, HttpStatus, Res } from '@nestjs/common';
 import { AccountService } from './account.service';
 import { CreateAccountDTO } from './dtos/create.dto';
 import { LoginAccountDTO } from './dtos/login.dto';
@@ -25,11 +25,21 @@ export class AccountController {
    * @param {CreateAccountDTO} dto - data transfer object containing account info.
    */
   @Post()
-  @HttpCode(201)
-  async create(@Body() dto: CreateAccountDTO) : Promise<any> {
+  async create(@Body() dto: CreateAccountDTO, @Res() res) : Promise<any> {
 
-    // Return the ID of the account having awaited it's creation
-    return await this.service.create(dto);
+    // Get the account from the DB
+    const account = await this.service.findOne(dto.accountName);
+
+    // The account name already exists
+    if (account) {
+      res.status(HttpStatus.CONFLICT).send();
+    } 
+    
+    // Create a new account
+    else {
+      await this.service.create(dto);
+      res.status(HttpStatus.CREATED).send();
+    }
   }
 
   /**
