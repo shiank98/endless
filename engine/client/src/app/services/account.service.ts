@@ -43,4 +43,26 @@ export class AccountService {
       })
     );
   }
+
+  /**
+   * This function sends account info to the server to check account name and email availability.
+   * @param {object} accountInfo - The account information provided by the user to be sent.
+   * @param {Function} onError - The callback function for when an error occurs.
+   */
+  check(accountInfo: object, onError: Function) {
+
+    // Send a create account POST request to the server
+    return this.http.post(`${env.server}/account/check`, accountInfo).pipe(
+      
+      // The account name already exists in the DB
+      catchError(() => {
+
+        // Fire the error callback function
+        onError();
+
+        // Throw the error
+        return throwError(new Error('Account name or email is already in use.'))
+      })
+    );
+  }
 }

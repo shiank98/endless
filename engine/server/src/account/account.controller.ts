@@ -1,6 +1,7 @@
 import { Controller, Post, Body, HttpCode, UnauthorizedException, HttpStatus, Res } from '@nestjs/common';
 import { AccountService } from './account.service';
 import { CreateAccountDTO } from './dtos/create.dto';
+import { CheckAccountDTO } from './dtos/check.dto';
 import { LoginAccountDTO } from './dtos/login.dto';
 
 /**
@@ -39,6 +40,29 @@ export class AccountController {
     else {
       await this.service.create(dto);
       res.status(HttpStatus.CREATED).send();
+    }
+  }
+  
+  /**
+   * Used for checking requests for account creation.
+   * @version 1.0.0
+   * @param {CheckAccountDTO} dto - data transfer object containing account info.
+   */
+  @Post('check')
+  async check(@Body() dto: CheckAccountDTO, @Res() res) : Promise<any> {
+
+    // Get the account from the DB
+    const accountName = await this.service.findOne({ accountName: dto.accountName });
+    const email = await this.service.findOne({ email: dto.email });
+
+    // The account name or email already exists
+    if (accountName || email) {
+      res.status(HttpStatus.CONFLICT).send();
+    } 
+    
+    // The account name and email are available
+    else {
+      res.status(HttpStatus.OK).send();
     }
   }
 

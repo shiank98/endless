@@ -375,26 +375,31 @@ export class LaunchScreenComponent implements OnInit {
       // Let the user know the account name already exists
       this.showNote(
         "Already exists",
-        "The account name you provided already exists in our database, use another."
+        "The account name or email you provided already exists in our database, use another."
       );
     };
-    
-    // Send the account info to the server via the account service
-    this.accountService.create(accountInfo, errorCallback).subscribe(() => {
-      
+
+    // Send the account info to the server via the account service for checking
+    this.accountService.check(accountInfo, errorCallback).subscribe(() => {
+
+      // Let them know it's been accepted and create the timer
       this.showNote(
         "Account accepted",
         "Please wait a moment for creation.",
         10000, () => {
 
-          // Close the create account panel
-          this.hideActivePanel();
+          // Send the account info to the server via the account service for creation
+          this.accountService.create(accountInfo, errorCallback).subscribe(() => {
+            
+            // Close the create account panel
+            this.hideActivePanel();
 
-          // Show them the welcome message
-          this.showNote(
-            "Welcome",
-            "Use your new account name and password to login to the game."
-          );
+            // Show them the welcome message
+            this.showNote(
+              "Welcome",
+              "Use your new account name and password to login to the game."
+            );
+          });
         }
       );
     });

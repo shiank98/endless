@@ -6,7 +6,43 @@
 	},
 	"item": [
 		{
-			"name": "account",
+			"name": "account/check",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"accountName\": \"johnDoe\",\n  \"email\": \"john@doe.com\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/account/check",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"account",
+						"check"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "account/create",
 			"request": {
 				"method": "POST",
 				"header": [
@@ -62,14 +98,15 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:3000/account",
+					"raw": "http://localhost:3000/account/login",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "3000",
 					"path": [
-						"account"
+						"account",
+						"login"
 					]
 				}
 			},
