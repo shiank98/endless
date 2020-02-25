@@ -283,7 +283,7 @@ export class LaunchScreenComponent implements OnInit {
   /**
    * Checks the create account form details.
    */
-  createAccount() : void {
+  createAccount() {
 
     // Get the create account panel
     const createAccountPanel: HTMLElement = document.querySelector('.create-account-panel');
@@ -367,27 +367,37 @@ export class LaunchScreenComponent implements OnInit {
 
       // Stop here
       return;
-    }
+    }  
+    
+    // Define the error callback function
+    const errorCallback = () => {
+  
+      // Let the user know the account name already exists
+      this.showNote(
+        "Already exists",
+        "The account name you provided already exists in our database, use another."
+      );
+    };
+    
+    // Send the account info to the server via the account service
+    this.accountService.create(accountInfo, errorCallback).subscribe(() => {
+      
+      this.showNote(
+        "Account accepted",
+        "Please wait a moment for creation.",
+        10000, () => {
 
-    // Let the user know the account has been accepted, start the timer for account creation
-    this.showNote(
-      "Account accepted",
-      "Please wait a moment for creation.",
-      10000, () => {
-        
-        // We have correct input so send the account info to the server via the account service
-        this.accountService.create(accountInfo);
+          // Close the create account panel
+          this.hideActivePanel();
 
-        // Close the create account panel
-        this.hideActivePanel();
-
-        // Show them the welcome message
-        this.showNote(
-          "Welcome",
-          "Use your new account name and password to login to the game."
-        );
-      }
-    );
+          // Show them the welcome message
+          this.showNote(
+            "Welcome",
+            "Use your new account name and password to login to the game."
+          );
+        }
+      );
+    });
   }
 
   /**

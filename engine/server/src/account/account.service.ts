@@ -31,11 +31,11 @@ export class AccountService {
 
   /**
    * Attempt to find an account in the database.
-   * @param {String} accountName - The account name.
+   * @param {object} query - The query to run.
    * @version 1.0.0
    */
-  async findOne(accountName: string): Promise<any> {
-    return await this.model.findOne({ accountName });
+  async findOne(query: object): Promise<any> {
+    return await this.model.findOne(query);
   }
 
   /**
@@ -62,7 +62,7 @@ export class AccountService {
   async validate(dto: LoginAccountDTO) {
 
     // Get the account from the database
-    const account = await this.findOne(dto.accountName);
+    const account = await this.findOne({ accountName: dto.accountName });
 
     // If they exist return a validation result
     return account ? bcrypt.compareSync(dto.password, account.password) : false;

@@ -28,7 +28,7 @@ export class AccountController {
   async create(@Body() dto: CreateAccountDTO, @Res() res) : Promise<any> {
 
     // Get the account from the DB
-    const account = await this.service.findOne(dto.accountName);
+    const account = await this.service.findOne({ accountName: dto.accountName });
 
     // The account name already exists
     if (account) {
