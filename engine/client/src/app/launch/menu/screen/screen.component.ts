@@ -62,7 +62,7 @@ export class LaunchScreenComponent implements OnInit {
   ngOnInit() : void {
 
     // Load the launch screen music
-    //this.loadMusic();
+    this.loadMusic();
 
     // Load the button sound effects
     this.loadButtonSFX();
