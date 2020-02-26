@@ -15,6 +15,11 @@ import { env } from '../../environments/environment';
 export class AccountService {
 
   /**
+   * The JWT access token is used for authenticating requests with the server.
+   */
+  private accessToken: any = null;
+
+  /**
    * The account service constructor.
    * @param {HttpClient} http - The HTTP client is used for making requests to the server.
    */
@@ -45,6 +50,35 @@ export class AccountService {
   }
 
   /**
+   * This function stores the JWT access token used for authenticating requests with the server.
+   * @param {string} accessToken - The access token we're storing.
+   */
+  setToken(accessToken: string) : void {
+    this.accessToken = accessToken;
+  }
+
+  /**
+   * This function retrieves the stored JWT access token used for authenticating requests with the server.
+   */
+  getToken() : string | null {
+    return this.accessToken;
+  }
+
+  /**
+   * This function logs out clearing the stored JWT access token.
+   */
+  logout() : void {
+    this.setToken(null);
+  }
+
+  /**
+   * This function checks if the user is authenticated having a JWT access token stored.
+   */
+  isAuthed() : boolean {
+    return this.getToken() ? true : false;
+  }
+
+  /**
    * This function sends account info to the server to check account name and email availability.
    * @param {object} accountInfo - The account information provided by the user to be sent.
    * @param {Function} onError - The callback function for when an error occurs.
@@ -62,6 +96,28 @@ export class AccountService {
 
         // Throw the error
         return throwError(new Error('Account name or email is already in use.'))
+      })
+    );
+  }
+
+  /**
+   * This function sends account info to the server in order to login.
+   * @param {object} loginInfo - The login information provided by the user to be sent.
+   * @param {Function} onError - The callback function for when an error occurs.
+   */
+  login(loginInfo: object, onError: Function) {
+
+    // Send a create login POST request to the server
+    return this.http.post(`${env.server}/account/login`, loginInfo).pipe(
+      
+      // The account name already exists in the DB
+      catchError(() => {
+
+        // Fire the error callback function
+        onError();
+
+        // Throw the error
+        return throwError(new Error('The account or password you provided could not be found in our database.'))
       })
     );
   }

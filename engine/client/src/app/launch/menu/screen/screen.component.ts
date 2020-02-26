@@ -186,6 +186,11 @@ export class LaunchScreenComponent implements OnInit {
     if (this.activePanel === 'create-account') {
       this.clearCreateAccountForm();
     }
+
+    // If we're authenticated log us out
+    if (this.accountService.isAuthed()) {
+      this.logoutAccount();
+    }
     
     this.activePanel = '';
   }
@@ -403,6 +408,79 @@ export class LaunchScreenComponent implements OnInit {
         }
       );
     });
+  }
+
+  /**
+   * Checks the login account form details.
+   */
+  loginAccount() {
+
+    // Get the login account panel
+    const playGamePanel: HTMLElement = document.querySelector('.play-game-panel');
+
+    // Get the login account form fields
+    const accountName: HTMLInputElement = playGamePanel.querySelector('.input-account-name');
+    const password: HTMLInputElement = playGamePanel.querySelector('.input-password');
+
+    // Get the information for account creation provided by the user
+    const loginInfo = {
+      'accountName': accountName.value,
+      'password': password.value
+    };
+
+    // Check to make sure we haven't got wrong input
+    const wrongInput = (
+      ! loginInfo.accountName || 
+      ! loginInfo.password
+    ) ? true : false;
+
+    // Stop here: Wrong input
+    if (wrongInput) {
+      this.showNote(
+        "Wrong input", 
+        "Some of the fields are still empty. Fill in all the fields and try again."
+      );
+
+      // Stop here
+      return;
+    }
+    
+    // Define the error callback function
+    const errorCallback = () => {
+  
+      // Let the user know the account name already exists
+      this.showNote(
+        "Login refused",
+        "The account or password you provided could not be found in our database."
+      );
+    };
+
+    // Send the account info to the server via the account service for checking
+    this.accountService.login(loginInfo, errorCallback).subscribe((res: any) => {
+
+      window['a'] = this.accountService;
+
+      // Store the access token
+      this.accountService.setToken(res.access_token);
+
+      // Let them know it's been accepted and create the timer
+      this.showNote(
+        "Login success",
+        "Loading account data.",
+        2000, () => {
+
+          // Show the character slots panel
+          this.showPanel('character-slots');
+        }
+      );
+    });
+  }
+
+  /**
+   * Logs the user out of their account.
+   */
+  logoutAccount() : void {
+    this.accountService.logout();
   }
 
   /**

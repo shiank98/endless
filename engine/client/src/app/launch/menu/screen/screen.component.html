@@ -1,32 +1,35 @@
+<!-- Displays the developer graphic -->
+<img class="developer" src="assets/dev/hyp6xia.png">
+
 <!-- This displays the active hero image -->
-<div [ngClass]="{ 'shift-left': (activePanel === 'create-account') }" class="hero"></div>
+<div [ngClass]="{ 'shift-left': (activePanel === 'create-account' || activePanel === 'character-slots') }" class="hero"></div>
 
 <!-- Displays the back corner button -->
-<button (click)="hideActivePanel()" [ngClass]="{ 'invisible': (activePanel !== 'create-account') }" class="btn back-corner"></button>
+<button (click)="hideActivePanel()" [ngClass]="{ 'no-op': (activePanel !== 'create-account' && activePanel !== 'character-slots') }" class="btn back-corner"></button>
 
 <!-- Displays the main menu -->
-<div [ngClass]="{ 'invisible': (activePanel === 'create-account') }" class="main-menu">
+<div [ngClass]="{ 'no-op': (activePanel === 'create-account' || activePanel === 'character-slots') }" class="main-menu">
   <button (click)="loadHeroImage(); showPanel('create-account')" class="btn btn-1 create-account"></button>
   <button (click)="showPanel('play-game')" class="btn btn-1 play-game"></button>
   <button (click)="showCredits()" class="btn btn-1 view-credits"></button>
 </div>
 
 <!-- Displays the play game menu (login) panel -->
-<div [ngClass]="{ 'invisible': (activePanel !== 'play-game') }" class="play-game-panel">
+<div [ngClass]="{ 'no-op': (activePanel !== 'play-game') }" class="play-game-panel">
 
   <!-- Username and password input -->
-  <input class="input-user" spellcheck="false">
-  <input type="password" class="input-pass">
+  <input class="input-account-name" spellcheck="false">
+  <input class="input-password" type="password">
 
   <!-- Panel buttons -->
   <div class="buttons">
-    <button (click)="showNoServer()" class="btn btn-2 connect"></button>
+    <button (click)="loginAccount()" class="btn btn-2 connect"></button>
     <button (click)="hideActivePanel()" class="btn btn-2 cancel"></button>
   </div>
 </div>
 
 <!-- Displays the create account panel -->
-<div [ngClass]="{ 'invisible': (activePanel !== 'create-account') }" class="create-account-panel">
+<div [ngClass]="{ 'no-op': (activePanel !== 'create-account') }" class="create-account-panel">
 
   <!-- Account Name -->
   <img src="assets/ui/launch/labels/account-name.png">
@@ -62,8 +65,23 @@
   </div>
 </div>
 
+<!-- Displays the character slots panel -->
+<div [ngClass]="{ 'no-op': (activePanel !== 'character-slots') }" class="character-slots-panel">
+
+  <!-- Display the character slots -->
+  <div class="slot"></div>
+  <div class="slot"></div>
+  <div class="slot"></div>
+
+  <!-- Panel buttons -->
+  <div class="buttons">
+    <button (click)="createAccount();" class="btn btn-2 create mr-3"></button>
+    <button (click)="loadHeroImage(); hideActivePanel()" class="btn btn-2 cancel"></button>
+  </div>
+</div>
+
 <!-- Displays a note to the user -->
-<div [ngClass]="{ 'invisible': (! activeNote) }" class="note-panel">
+<div [ngClass]="{ 'no-op': (! activeNote) }" class="note-panel">
 
   <!-- Note title text -->
   <div *ngIf="this.activeNote" class="title-text">{{ this.activeNote.title }}</div>
@@ -84,7 +102,7 @@
 </div>
 
 <!-- Displays a read-me to the user -->
-<div [ngClass]="{ 'invisible': (! this.activeReadMe.paragraphs) }" class="read-me-panel">
+<div [ngClass]="{ 'no-op': (! this.activeReadMe.paragraphs) }" class="read-me-panel">
 
   <!-- Read-me message paragraphs -->
   <div class="message-text">
