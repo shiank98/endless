@@ -418,8 +418,65 @@ launch-menu-screen .new-character-panel {
   zoom: 1.6;
 }
 
+/* New character preview display */
+launch-menu-screen .new-character-panel .preview {
+  width: 18px;
+  height: 58px;
+  position: absolute;
+  right: 18.5%;
+  top: 38%;
+}
+
+/* New character body */
+launch-menu-screen .new-character-panel .preview .body {
+  background-image: url("assets/sprites/characters/avatar/standing.png");
+  background-repeat: no-repeat;
+  position: relative;
+  height: inherit;
+  width: inherit;
+}
+
+launch-menu-screen .new-character-panel .preview .hair {
+  background-repeat: no-repeat;
+  height: 54px;
+  width: 28px;
+  position: absolute;
+  top: -12px;
+  left: -6px;
+}
+
+/* New character hair */
+launch-menu-screen .new-character-panel .preview .hair.brown.primary {
+  background-image: url("assets/sprites/characters/avatar/hair/female/0-standing-brown-0-0.png");
+}
+
+launch-menu-screen .new-character-panel .preview .hair.brown.secondary {
+  background-image: url("assets/sprites/characters/avatar/hair/female/0-standing-brown-0-1.png");
+}
+
+launch-menu-screen .new-character-panel .preview .hair.white.primary {
+  background-image: url("assets/sprites/characters/avatar/hair/female/0-standing-white-0-0.png");
+}
+
+launch-menu-screen .new-character-panel .preview .hair.white.secondary {
+  background-image: url("assets/sprites/characters/avatar/hair/female/0-standing-white-0-1.png");
+}
+
+/* New character body options */
+launch-menu-screen .new-character-panel .preview .body.female {
+  background-position-x: calc(-18px * 0);
+}
+
+launch-menu-screen .new-character-panel .preview .body.male {
+  background-position-x: calc(-18px * 2);
+}
+
+launch-menu-screen .new-character-panel .preview .body.light {
+  background-position-y: calc(-58px * 0);
+}
+
 /* New character input display */
-.new-character-panel .input-name {
+launch-menu-screen .new-character-panel .input-name {
   position: absolute;
   top: 23.5%;
   left: 22%;

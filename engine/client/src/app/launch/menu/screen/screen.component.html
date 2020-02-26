@@ -106,6 +106,13 @@
 <!-- Displays the new character panel -->
 <div [ngClass]="{ 'no-op': (activePanel !== 'new-character') }" class="new-character-panel">
 
+  <!-- New character preview -->
+  <div (click)="newCharacter.hairColour = (newCharacter.hairColour === 'white') ? 'brown' : 'white'" class="preview">
+    <div class="hair {{newCharacter.hairColour}} secondary"></div>
+    <div class="body {{newCharacter.gender}}"></div>
+    <div class="hair {{newCharacter.hairColour}} primary"></div>
+  </div>
+
   <!-- Name input -->
   <input class="input-name" spellcheck="false">
 

@@ -25,17 +25,17 @@ export class LaunchScreenComponent implements OnInit {
   /**
    * String to keep track of which panel is active.
    */
-  private activePanel: string = '';
+  private activePanel: string | null = '';
 
   /**
    * Object to store the active note being showed to the user, null when inactive.
    */
-  private activeNote: any = null;
+  private activeNote: any | null = null;
 
   /**
    * Object to store the active read-me paragraphs being showed to the user and a format function.
    */
-  private activeReadMe: any = {
+  private activeReadMe: any | null = {
     paragraphs: null,
 
     formattedParagraphs() {
@@ -46,7 +46,15 @@ export class LaunchScreenComponent implements OnInit {
   /**
    * Stores the active timeout, allowing us to clear it prematurely.
    */
-  private activeTimer: any = null;
+  private activeTimer: any | null = null;
+
+  /**
+   * Stores the data of new characters being created.
+   */
+  private newCharacter: any | null = {
+    gender: 'female',
+    hairColour: 'white'
+  };
 
   /**
    * The account service constructor.
