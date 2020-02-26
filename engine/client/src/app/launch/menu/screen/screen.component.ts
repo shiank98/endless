@@ -458,8 +458,6 @@ export class LaunchScreenComponent implements OnInit {
     // Send the account info to the server via the account service for checking
     this.accountService.login(loginInfo, errorCallback).subscribe((res: any) => {
 
-      window['a'] = this.accountService;
-
       // Store the access token
       this.accountService.setToken(res.access_token);
 
