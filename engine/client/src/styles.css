@@ -418,6 +418,20 @@ launch-menu-screen .new-character-panel {
   zoom: 1.6;
 }
 
+/* New character input display */
+.new-character-panel .input-name {
+  position: absolute;
+  top: 23.5%;
+  left: 22%;
+  width: 38.5%;
+  background: none;
+  border: none;
+  box-shadow: none;
+  color: #eeeec5;
+  line-height: 21px;
+  text-indent: 4%;
+}
+
 /* Container for the new character panel buttons */
 launch-menu-screen .new-character-panel .buttons {
   position: absolute;

@@ -379,6 +379,9 @@ export class LaunchScreenComponent implements OnInit {
           // Send the account info to the server via the account service for creation
           this.accountService.create(accountInfo, errorCallback).subscribe(() => {
             
+            // Load a new hero image
+            this.loadHeroImage();
+
             // Close the create account panel
             this.hideActivePanel();
 
@@ -449,6 +452,9 @@ export class LaunchScreenComponent implements OnInit {
         "Login success",
         "Loading account data.",
         2000, () => {
+            
+          // Load a new hero image
+          this.loadHeroImage();
 
           // Show the character slots panel
           this.showPanel('character-slots');

@@ -5,7 +5,7 @@
 <div [ngClass]="{ 'shift-left': (activePanel === 'create-account' || activePanel === 'character-slots' || activePanel === 'new-character') }" class="hero"></div>
 
 <!-- Displays the back corner button -->
-<button (click)="hideActivePanel()" [ngClass]="{ 'no-op': (activePanel !== 'create-account' && activePanel !== 'character-slots') }" class="btn back-corner"></button>
+<button (click)="loadHeroImage(); hideActivePanel()" [ngClass]="{ 'no-op': (activePanel !== 'create-account' && activePanel !== 'character-slots') }" class="btn back-corner"></button>
 
 <!-- Displays the main menu -->
 <div [ngClass]="{ 'no-op': (activePanel === 'create-account' || activePanel === 'character-slots' || activePanel === 'new-character') }" class="main-menu">
@@ -17,7 +17,7 @@
 <!-- Displays the play game menu (login) panel -->
 <div [ngClass]="{ 'no-op': (activePanel !== 'play-game') }" class="play-game-panel">
 
-  <!-- Username and password input -->
+  <!-- Account name and password input -->
   <input class="input-account-name" spellcheck="false">
   <input class="input-password" type="password">
 
@@ -99,12 +99,15 @@
   <!-- Panel buttons -->
   <div class="buttons">
     <button (click)="showPanel('new-character')" class="btn btn-2 create mr-3"></button>
-    <button (click)="loadHeroImage(); hideActivePanel()" class="btn btn-2 cancel"></button>
+    <button (click)="loadHeroImage(); loadHeroImage(); hideActivePanel()" class="btn btn-2 cancel"></button>
   </div>
 </div>
 
 <!-- Displays the new character panel -->
 <div [ngClass]="{ 'no-op': (activePanel !== 'new-character') }" class="new-character-panel">
+
+  <!-- Name input -->
+  <input class="input-name" spellcheck="false">
 
   <!-- Panel buttons -->
   <div class="buttons">
