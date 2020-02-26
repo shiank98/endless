@@ -62,24 +62,7 @@ export class LaunchScreenComponent implements OnInit {
   ngOnInit() : void {
 
     // Load the launch screen music
-    const music = new Audio('assets/mfx/launch-menu-screen.mp3');
-
-    // Set it to loop
-    music.loop = true;
-
-    // Set the volume to 75%
-    music.volume = 0.75;
-
-    // If the music isn't playing we need to play it (need to wait for user interaction first) 
-    document.querySelector('launch-menu-screen').addEventListener('mousemove', e => {
-      
-      // No music is playing and we have an interaction
-      if (music.paused) {
-
-        // Play the music
-        music.play();
-      }
-    });
+    //this.loadMusic();
 
     // Load the button sound effects
     this.loadButtonSFX();
@@ -500,7 +483,7 @@ export class LaunchScreenComponent implements OnInit {
     setTimeout(() => {
 
       // Load clicking sounds for buttons without button 1 SFX loaded
-      document.querySelectorAll('launch-menu-screen .btn-1, launch-menu-screen .btn-2, launch-menu-screen .back-corner')
+      document.querySelectorAll('launch-menu-screen .btn-1, launch-menu-screen .btn-2, launch-menu-screen .btn-4, launch-menu-screen .back-corner')
         .forEach((btn: any) => {
 
           // This button has no SFX loadbtnd
@@ -537,5 +520,30 @@ export class LaunchScreenComponent implements OnInit {
           }
         });
     }, 50);
+  }
+
+  /**
+   * Loads launch screen background music.
+   */
+  loadMusic() : void {
+    
+    const music = new Audio('assets/mfx/launch-menu-screen.mp3');
+
+    // Set it to loop
+    music.loop = true;
+
+    // Set the volume to 75%
+    music.volume = 0.75;
+
+    // If the music isn't playing we need to play it (need to wait for user interaction first) 
+    document.querySelector('launch-menu-screen').addEventListener('mousemove', e => {
+      
+      // No music is playing and we have an interaction
+      if (music.paused) {
+
+        // Play the music
+        music.play();
+      }
+    });
   }
 }

@@ -103,7 +103,8 @@ launch-menu-screen .btn-2 {
   zoom: 0.8;
 }
 
-launch-menu-screen .btn-3 {
+launch-menu-screen .btn-3,
+launch-menu-screen .btn-4 {
   width: 91px;
   height: 29px;
 }
@@ -120,7 +121,9 @@ launch-menu-screen .btn-2:focus {
 }
 
 launch-menu-screen .btn-3:hover,
-launch-menu-screen .btn-3:focus {
+launch-menu-screen .btn-3:focus,
+launch-menu-screen .btn-4:hover,
+launch-menu-screen .btn-4:focus {
   background-position: 91px 0px;
 }
 
@@ -162,6 +165,14 @@ launch-menu-screen .create {
   background-image: url("assets/ui/launch/buttons/create.png");
 }
 
+launch-menu-screen .login {
+  background-image: url("assets/ui/launch/buttons/login.png");
+}
+
+launch-menu-screen .delete {
+  background-image: url("assets/ui/launch/buttons/delete.png");
+}
+
 launch-menu-screen .back-corner {
   background-image: url("assets/ui/launch/buttons/back-corner.png");
   background-clip: padding-box;
@@ -181,7 +192,7 @@ launch-menu-screen .play-game-panel {
   position: absolute;
   right: 10%;
   bottom: 10%;
-  background-image: url(assets/ui/launch/panels/play-game.bmp);
+  background-image: url("assets/ui/launch/panels/play-game.bmp");
   zoom: 1.6;
 }
 
@@ -241,7 +252,7 @@ launch-menu-screen .note-panel {
   position: absolute;
   right: calc(50% - 145px);
   bottom: calc(50% - 78px);
-  background-image: url(assets/ui/launch/panels/note.bmp);
+  background-image: url("assets/ui/launch/panels/note.bmp");
   zoom: 1.6;
 }
 
@@ -303,7 +314,7 @@ launch-menu-screen .read-me-panel {
   position: absolute;
   right: calc(50% - 180px);
   bottom: calc(50% - 120px);
-  background-image: url(assets/ui/launch/panels/read-me.bmp);
+  background-image: url("assets/ui/launch/panels/read-me.bmp");
   zoom: 1.6;
 }
 
@@ -375,10 +386,43 @@ launch-menu-screen .character-slots-panel .slot {
 }
 
 /* Container for the character slots panel buttons */
+launch-menu-screen .character-slots-panel .slot .buttons {
+  zoom: 1;
+  position: absolute;
+  top: unset;
+  right: 8.75%;
+  margin-top: 20%;
+}
+
+/* Character slot buttons */
+launch-menu-screen .character-slots-panel .slot .btn {
+  display: block;
+}
+
+/* Container for the character slots panel buttons */
 launch-menu-screen .character-slots-panel .buttons {
   position: relative;
   top: 1%;
   zoom: 1.2;
+}
+
+/* This panel shows the new character display */
+launch-menu-screen .new-character-panel {
+  width: 360px;
+  height: 240px;
+  display: block;
+  position: absolute;
+  right: calc(50% - 180px);
+  bottom: calc(50% - 120px);
+  background-image: url("assets/ui/launch/panels/new-character.bmp");
+  zoom: 1.6;
+}
+
+/* Container for the new character panel buttons */
+launch-menu-screen .new-character-panel .buttons {
+  position: absolute;
+  bottom: 7%;
+  right: 5%;
 }
 
 /**

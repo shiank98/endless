@@ -2,13 +2,13 @@
 <img class="developer" src="assets/dev/hyp6xia.png">
 
 <!-- This displays the active hero image -->
-<div [ngClass]="{ 'shift-left': (activePanel === 'create-account' || activePanel === 'character-slots') }" class="hero"></div>
+<div [ngClass]="{ 'shift-left': (activePanel === 'create-account' || activePanel === 'character-slots' || activePanel === 'new-character') }" class="hero"></div>
 
 <!-- Displays the back corner button -->
 <button (click)="hideActivePanel()" [ngClass]="{ 'no-op': (activePanel !== 'create-account' && activePanel !== 'character-slots') }" class="btn back-corner"></button>
 
 <!-- Displays the main menu -->
-<div [ngClass]="{ 'no-op': (activePanel === 'create-account' || activePanel === 'character-slots') }" class="main-menu">
+<div [ngClass]="{ 'no-op': (activePanel === 'create-account' || activePanel === 'character-slots' || activePanel === 'new-character') }" class="main-menu">
   <button (click)="loadHeroImage(); showPanel('create-account')" class="btn btn-1 create-account"></button>
   <button (click)="showPanel('play-game')" class="btn btn-1 play-game"></button>
   <button (click)="showCredits()" class="btn btn-1 view-credits"></button>
@@ -66,17 +66,50 @@
 </div>
 
 <!-- Displays the character slots panel -->
-<div [ngClass]="{ 'no-op': (activePanel !== 'character-slots') }" class="character-slots-panel">
+<div [ngClass]="{ 'no-op': (activePanel !== 'character-slots' && activePanel !== 'new-character') }" class="character-slots-panel">
 
   <!-- Display the character slots -->
-  <div class="slot"></div>
-  <div class="slot"></div>
-  <div class="slot"></div>
+  <div class="slot">
+
+    <!-- Slot buttons -->
+    <div class="buttons">
+      <button class="btn btn-4 login"></button>
+      <button class="btn btn-4 delete"></button>
+    </div>
+  </div>
+
+  <div class="slot">
+
+    <!-- Slot buttons -->
+    <div class="buttons">
+      <button class="btn btn-4 login"></button>
+      <button class="btn btn-4 delete"></button>
+    </div>
+  </div>
+
+  <div class="slot">
+
+    <!-- Slot buttons -->
+    <div class="buttons">
+      <button class="btn btn-4 login"></button>
+      <button class="btn btn-4 delete"></button>
+    </div>
+  </div>
 
   <!-- Panel buttons -->
   <div class="buttons">
-    <button class="btn btn-2 create mr-3"></button>
+    <button (click)="showPanel('new-character')" class="btn btn-2 create mr-3"></button>
     <button (click)="loadHeroImage(); hideActivePanel()" class="btn btn-2 cancel"></button>
+  </div>
+</div>
+
+<!-- Displays the new character panel -->
+<div [ngClass]="{ 'no-op': (activePanel !== 'new-character') }" class="new-character-panel">
+
+  <!-- Panel buttons -->
+  <div class="buttons">
+    <button class="btn btn-3 ok mr-3"></button>
+    <button (click)="showPanel('character-slots')" class="btn btn-3 cancel-small"></button>
   </div>
 </div>
 
