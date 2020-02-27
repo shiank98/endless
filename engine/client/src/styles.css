@@ -14,6 +14,7 @@
 /**
  * Global Styles
  */
+ 
 html, body {
   overflow: hidden;
 }
@@ -109,6 +110,13 @@ launch-menu-screen .btn-4 {
   height: 29px;
 }
 
+launch-menu-screen .btn-5 {
+  background-image: url(assets/ui/launch/buttons/character-customisation.png);
+  width: 23px;
+  height: 18px;
+  padding: 0px;
+}
+
 /* Shift the button backgrounds when hovered */
 launch-menu-screen .btn-1:hover,
 launch-menu-screen .btn-1:focus {
@@ -171,6 +179,10 @@ launch-menu-screen .login {
 
 launch-menu-screen .delete {
   background-image: url("assets/ui/launch/buttons/delete.png");
+}
+
+launch-menu-screen .character-customisation {
+  background-image: url("assets/ui/launch/buttons/character-customisation.png");
 }
 
 launch-menu-screen .back-corner {
@@ -407,7 +419,7 @@ launch-menu-screen .character-slots-panel .buttons {
 }
 
 /* This panel shows the new character display */
-launch-menu-screen .new-character-panel {
+.new-character-panel {
   width: 360px;
   height: 240px;
   display: block;
@@ -419,7 +431,7 @@ launch-menu-screen .new-character-panel {
 }
 
 /* New character preview display */
-launch-menu-screen .new-character-panel .preview {
+.new-character-preview {
   width: 18px;
   height: 58px;
   position: absolute;
@@ -428,7 +440,7 @@ launch-menu-screen .new-character-panel .preview {
 }
 
 /* New character body */
-launch-menu-screen .new-character-panel .preview .body {
+.new-character-preview .body {
   background-image: url("assets/sprites/characters/avatar/standing.png");
   background-repeat: no-repeat;
   position: relative;
@@ -436,47 +448,99 @@ launch-menu-screen .new-character-panel .preview .body {
   width: inherit;
 }
 
-launch-menu-screen .new-character-panel .preview .hair {
+.new-character-preview .hair {
   background-repeat: no-repeat;
   height: 54px;
   width: 28px;
   position: absolute;
-  top: -12px;
+}
+
+.new-character-preview.g-female .hair {
+  background-image: url("assets/sprites/characters/avatar/hair-female.png");
   left: -6px;
+  top: -12px;
 }
 
-/* New character hair */
-launch-menu-screen .new-character-panel .preview .hair.brown.primary {
-  background-image: url("assets/sprites/characters/avatar/hair/female/0-standing-brown-0-0.png");
+.new-character-preview.g-male .hair { 
+  background-image: url("assets/sprites/characters/avatar/hair-male.png");
+  left: -6px;
+  top: -13px;
 }
 
-launch-menu-screen .new-character-panel .preview .hair.brown.secondary {
-  background-image: url("assets/sprites/characters/avatar/hair/female/0-standing-brown-0-1.png");
+/* New character hair layer display positioning */
+.new-character-preview .hair.fs { background-position-y: calc(-54px * 1); }
+.new-character-preview .hair.bs { background-position-y: calc(-54px * 2); }
+
+/* Gender buttons */
+.new-character-panel .gender {
+  position: absolute;
+  top: 32.75%;
+  left: 47.25%;
+  height: 18px;
+  width: 46px;
 }
 
-launch-menu-screen .new-character-panel .preview .hair.white.primary {
-  background-image: url("assets/sprites/characters/avatar/hair/female/0-standing-white-0-0.png");
+.new-character-panel .gender .btn { 
+  background-position-y: calc(-19px * 2); 
 }
 
-launch-menu-screen .new-character-panel .preview .hair.white.secondary {
-  background-image: url("assets/sprites/characters/avatar/hair/female/0-standing-white-0-1.png");
+/* Hair-style buttons */
+.new-character-panel .hair-style {
+  position: absolute;
+  top: 44%;
+  left: 47.25%;
+  height: 18px;
+  width: 46px;
 }
 
-/* New character body options */
-launch-menu-screen .new-character-panel .preview .body.female {
-  background-position-x: calc(-18px * 0);
+.new-character-panel .hair-style .btn { 
+  background-position-y: calc(-19px * 1); 
 }
 
-launch-menu-screen .new-character-panel .preview .body.male {
-  background-position-x: calc(-18px * 2);
+/* Hair-colour buttons */
+.new-character-panel .hair-colour {
+  position: absolute;
+  top: 55.25%;
+  left: 47.25%;
+  height: 18px;
+  width: 46px;
 }
 
-launch-menu-screen .new-character-panel .preview .body.light {
-  background-position-y: calc(-58px * 0);
+.new-character-panel .hair-colour .btn { 
+  background-position-y: calc(-19px * 0); 
+}
+
+/* Skin-colour buttons */
+.new-character-panel .skin-colour {
+  position: absolute;
+  top: 66.5%;
+  left: 47.25%;
+  height: 18px;
+  width: 46px;
+}
+
+.new-character-panel .skin-colour .btn { 
+  background-position-x: calc(-23px * 2);
+  background-position-y: calc(-19px * 2); 
+}
+
+/* Arrow button display */
+.new-character-panel .btn.arrow {
+  background-position-y: -40px;
+  background-position-x: -209px;
+  width: 21px;
+  height: 15px;
+  position: absolute;
+  left: 27px;
+  top: 8px;
+}
+
+.new-character-panel .toggle-buttons:hover .btn.arrow {
+  background-position-x: -230px;
 }
 
 /* New character input display */
-launch-menu-screen .new-character-panel .input-name {
+.new-character-panel .input-character-name {
   position: absolute;
   top: 23.5%;
   left: 22%;
@@ -490,7 +554,7 @@ launch-menu-screen .new-character-panel .input-name {
 }
 
 /* Container for the new character panel buttons */
-launch-menu-screen .new-character-panel .buttons {
+.new-character-panel .buttons {
   position: absolute;
   bottom: 7%;
   right: 5%;
@@ -499,7 +563,8 @@ launch-menu-screen .new-character-panel .buttons {
 /**
  * hyp6xia
  */
- .developer {
+
+.developer {
   height: 25%;
   position: absolute;
   bottom: 4%;

@@ -25,7 +25,7 @@ export class LaunchScreenComponent implements OnInit {
   /**
    * String to keep track of which panel is active.
    */
-  private activePanel: string | null = '';
+  private activePanel: string | null = 'new-character';
 
   /**
    * Object to store the active note being showed to the user, null when inactive.
@@ -53,8 +53,24 @@ export class LaunchScreenComponent implements OnInit {
    */
   private newCharacter: any | null = {
     gender: 'female',
-    hairColour: 'white'
+    hairColour: 'brown',
+    hairStyle: 1,
+    skinColour: 'light'
   };
+
+  /**
+   * Stores the hair colours for character customisation.
+   */
+  private hairColours: Array<string> = [
+    'brown', 'green', 'pink', 'red', 'yellow', 'blue', 'purple', 'cyan', 'white', 'black'
+  ];
+
+  /**
+   * Stores the skin colours for character customisation.
+   */
+  private skinColours: Array<string> = [
+    'light', 'tan', 'yellow', 'green', // 'skeleton', 'panda', 'fish'
+  ];
 
   /**
    * The account service constructor.
@@ -559,5 +575,183 @@ export class LaunchScreenComponent implements OnInit {
         music.play();
       }
     });
+  }
+
+  /**
+   * Toggle the gender of a new character during customisation.
+   */
+  toggleGender() {
+
+    // Set the gender of our new character
+    this.newCharacter.gender = this.newCharacter.gender === 'male' ? 'female' : 'male';
+
+    // Get the body display element and button
+    const body : HTMLElement = document.querySelector('.new-character-preview .body');
+    const toggleButton : HTMLElement = document.querySelector('.new-character-panel .gender .btn');
+
+    // Set the new positioning of the tilesheet
+    body.style.backgroundPositionX = `calc(-18px * ${this.newCharacter.gender === 'male' ? 2 : 0})`;
+    toggleButton.style.backgroundPositionX = `calc(-23px * ${this.newCharacter.gender === 'male' ? 1 : 0})`;
+  }
+
+  /**
+   * Toggle the hair-style of a new character during customisation.
+   */
+  toggleHairStyle() {
+
+    // Set the index to either the next style or loop back
+    this.newCharacter.hairStyle = this.newCharacter.hairStyle < 20 ? this.newCharacter.hairStyle + 1 : 1;
+
+    // Get the hair display elements and button
+    const hairFrontSide : HTMLElement = document.querySelector('.new-character-preview .hair.fs');
+    const hairBackSide : HTMLElement = document.querySelector('.new-character-preview .hair.bs');
+    const toggleButton : HTMLElement = document.querySelector('.new-character-panel .hair-style .btn');
+    
+    hairFrontSide.style.backgroundPositionY = `calc((-${(this.newCharacter.hairStyle - 1) * 216}px + -54px) * 1)`;
+    hairBackSide.style.backgroundPositionY = `calc((-${(this.newCharacter.hairStyle - 1) * 216}px + (-54px * 2)) * 1)`;
+
+    toggleButton.style.backgroundPositionX = `calc(-23px * ${this.newCharacter.hairStyle - 1})`;
+  }
+
+  /**
+   * Toggle the hair-colour of a new character during customisation.
+   */
+  toggleHairColour() {
+
+    // Get the index of the active hair colour
+    const index = this.hairColours.indexOf(this.newCharacter.hairColour);
+
+    // Get the index to either the next colour or loop back
+    const newIndex = index < this.hairColours.length - 1 ? index + 1 : 0;
+
+    // Set the hair colour to the new one via it's index
+    this.newCharacter.hairColour = this.hairColours[newIndex];
+
+    // Get the hair display elements and button
+    const hairFrontSide : HTMLElement = document.querySelector('.new-character-preview .hair.fs');
+    const hairBackSide : HTMLElement = document.querySelector('.new-character-preview .hair.bs');
+    const toggleButton : HTMLElement = document.querySelector('.new-character-panel .hair-colour .btn');
+
+    // Set the new positioning of the tilesheets
+    hairFrontSide.style.backgroundPositionY = `(-${this.newCharacter.hairStyle * 216}px + -54px) * 1`;
+    hairBackSide.style.backgroundPositionY = `(-${this.newCharacter.hairStyle * 216}px + (-54px * 2)) * 1`;
+    
+    hairFrontSide.style.backgroundPositionX = hairBackSide.style.backgroundPositionX = `calc(-28px * ${newIndex})`;
+    toggleButton.style.backgroundPositionX = `calc(-23px * ${newIndex})`;
+  }
+
+  /**
+   * Toggle the skin-colour of a new character during customisation.
+   */
+  toggleSkinColour() {
+
+    // Get the index of the active skin colour
+    const index = this.skinColours.indexOf(this.newCharacter.skinColour);
+
+    // Get the index to either the next colour or loop back
+    const newIndex = index < this.skinColours.length - 1 ? index + 1 : 0;
+
+    // Set the skin colour to the new one via it's index
+    this.newCharacter.skinColour = this.skinColours[newIndex];
+
+    // Get the body display element and button
+    const body : HTMLElement = document.querySelector('.new-character-preview .body');
+    const toggleButton : HTMLElement = document.querySelector('.new-character-panel .skin-colour .btn');
+
+    // Set the new positioning of the tilesheet
+    body.style.backgroundPositionY = `calc(-58px * ${newIndex})`;
+    toggleButton.style.backgroundPositionX = `calc(-23px * ${2 + newIndex})`;
+  }
+
+  /**
+   * Checks the new character form details.
+   */
+  createCharacter() {
+
+    // Get the new character panel
+    const newCharacterPanel: HTMLElement = document.querySelector('.new-character-panel');
+
+    // Get the create account form fields
+    const characterName: HTMLInputElement = newCharacterPanel.querySelector('.input-character-name');
+
+    // Get the information for character creation provided by the user
+    const characterInfo : any = {
+      characterName: characterName.value,
+      gender: this.newCharacter.gender,
+      hairStyle: this.newCharacter.hairStyle,
+      hairColour: this.newCharacter.hairColour,
+      skinColour: this.newCharacter.skinColour
+    };
+
+    // Check to make sure we haven't got wrong input
+    const wrongInput = (
+      (characterInfo.gender !== 'male' && characterInfo.gender !== 'female') ||
+      (characterInfo.hairStyle < 0 || characterInfo.hairStyle > 20) ||
+      (this.hairColours.indexOf(characterInfo.hairColour) < 0) ||
+      (this.skinColours.indexOf(characterInfo.skinColour) < 0)
+    ) ? true : false;
+
+    // Stop here: Wrong input
+    if (wrongInput) {
+      this.showNote(
+        "Wrong input", 
+        "Some of the character options are invalid. Please try again."
+      );
+
+      // Stop here
+      return;
+    }
+
+    // Stop here: Wrong character name
+    if (! characterInfo.characterName.trim() || characterInfo.characterName.indexOf(' ') > -1) {
+      this.showNote(
+        "Wrong input", 
+        "Enter a valid character name (letters and numbers only)."
+      );
+
+      // Clear the character name
+      characterName.value = '';
+
+      // Stop here
+      return;
+    }
+    
+    // // Define the error callback function
+    // const errorCallback = () => {
+  
+    //   // Let the user know the account name already exists
+    //   this.showNote(
+    //     "Already exists",
+    //     "The account name or email you provided already exists in our database, use another."
+    //   );
+    // };
+
+    // // Send the account info to the server via the account service for checking
+    // this.accountService.check(accountInfo, errorCallback).subscribe(() => {
+
+    //   // Let them know it's been accepted and create the timer
+    //   this.showNote(
+    //     "Account accepted",
+    //     "Please wait a moment for creation.",
+    //     10000, () => {
+
+    //       // Send the account info to the server via the account service for creation
+    //       this.accountService.create(accountInfo, errorCallback).subscribe(() => {
+            
+    //         // Load a new hero image
+    //         this.loadHeroImage();
+
+    //         // Close the create account panel
+    //         this.hideActivePanel();
+
+    //         // Show them the welcome message
+    //         this.showNote(
+    //           "Welcome",
+    //           "Use your new account name and password to login to the game."
+    //         );
+    //       });
+    //     }
+    //   );
+    // });
   }
 }

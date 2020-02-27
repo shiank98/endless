@@ -107,18 +107,44 @@
 <div [ngClass]="{ 'no-op': (activePanel !== 'new-character') }" class="new-character-panel">
 
   <!-- New character preview -->
-  <div (click)="newCharacter.hairColour = (newCharacter.hairColour === 'white') ? 'brown' : 'white'" class="preview">
-    <div class="hair {{newCharacter.hairColour}} secondary"></div>
-    <div class="body {{newCharacter.gender}}"></div>
-    <div class="hair {{newCharacter.hairColour}} primary"></div>
+  <div class="new-character-preview 
+    g-{{newCharacter.gender}} 
+    sc-{{newCharacter.skinColour}} 
+    hc-{{newCharacter.hairColour}} 
+    hs-{{newCharacter.hairStyle}}
+  ">
+    <div class="hair bs"></div>
+    <div class="body"></div>
+    <div class="hair fs"></div>
   </div>
 
   <!-- Name input -->
-  <input class="input-name" spellcheck="false">
+  <input class="input-character-name" spellcheck="false">
+
+  <!-- Customisation buttons -->
+  <div class="toggle-buttons gender">
+    <button (click)="toggleGender()" class="btn btn-5"></button>
+    <button (click)="toggleGender()" class="btn btn-5 arrow"></button>
+  </div>
+
+  <div class="toggle-buttons hair-style">
+    <button (click)="toggleHairStyle()" class="btn btn-5"></button>
+    <button (click)="toggleHairStyle()" class="btn btn-5 arrow"></button>
+  </div>
+
+  <div class="toggle-buttons hair-colour">
+    <button (click)="toggleHairColour()" class="btn btn-5"></button>
+    <button (click)="toggleHairColour()" class="btn btn-5 arrow"></button>
+  </div>
+
+  <div class="toggle-buttons skin-colour">
+    <button (click)="toggleSkinColour()" class="btn btn-5"></button>
+    <button (click)="toggleSkinColour()" class="btn btn-5 arrow"></button>
+  </div>
 
   <!-- Panel buttons -->
   <div class="buttons">
-    <button class="btn btn-3 ok mr-3"></button>
+    <button (click)="createCharacter()" class="btn btn-3 ok mr-3"></button>
     <button (click)="showPanel('character-slots')" class="btn btn-3 cancel-small"></button>
   </div>
 </div>
