@@ -110,16 +110,30 @@ export class LaunchScreenComponent implements OnInit {
 
     // Show updates info
     this.showInfo([
-      `It is very important that you enter your correct real name, location and email address when
-      creating an account. Our system will ask you to enter your real name and email address in
-      case you have forgotten your password.`,
-      
-      `A lot of players who forgot their password, and signed up using fake details, have been 
-      unsuccessful in gaining access to their account. So please do not make the same mistake; 
-      use real details to sign up for an account.`,
+      `THE ENDLESS ENGINE PROJECT NEWS`,
 
-      `Your information will only be used for recovering lost passwords. Your privacy is important
-      to us.`
+      `- 28th February 2020 -`,
+      `Welcome to the first public live version of our project. Like many players we miss the golden
+      days of Endless Online, however looking at the last decade we still don't have v29 and v28 is still 
+      not complete in any of the available servers - which are run by corrupt narcissists.`,
+      
+      `We aim to keep everything as close to the original as possible. We are creating the Unity of
+      the MMORPG world and recreating EO during the process, open-sourcing everything along the way. This is
+      a project with the goal of giving EO back the players, rather than trying to own and control them.`,
+
+      `The following functionality has been added, which you should feel free to test out:`,
+      `Launch screen (this), account creation, account login, new character creation designer (male is complete,
+      however female characters still need hairstyles added).`,
+
+      `Characters cannot be saved as of yet but that is the current task at hand, shortly followed by the actual 
+      in-game GUI, mapping, etc.`,
+
+      `If you notice any issues or have any feedback please let us know, we'd love to hear from you!`,
+
+      `We've only been working on this project a week but we've come far in that time. We'll bring back the 
+      golden days of EO before you know it - mark our words!!`,
+
+      `- The Endless Engine Team <3`
     ]);
   }
 
