@@ -40,8 +40,20 @@ export class AccountController {
     // Get the account from the DB
     const account = await this.service.findOne({ accountName: s(dto.accountName) });
 
+    const invalidInfo = (
+      dto.accountName.length > 40 ||
+      dto.countyOrLocation.length > 40 ||
+      dto.email.length > 40 ||
+      dto.realName.length > 40
+    ) ? true : false;
+
+    // Invalid account info
+    if (invalidInfo) {
+      res.status(HttpStatus.I_AM_A_TEAPOT).send();
+    }
+
     // The account name already exists
-    if (account) {
+    else if (account) {
       res.status(HttpStatus.CONFLICT).send();
     } 
     
