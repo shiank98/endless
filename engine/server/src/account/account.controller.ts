@@ -60,7 +60,14 @@ export class AccountController {
     
     // Create a new account
     else {
-      await this.service.create(dto);
+      await this.service.create({
+        accountName: s(dto.accountName),
+        countyOrLocation: dto.countyOrLocation,
+        email: s(dto.email),
+        password: s(dto.accountName),
+        realName: dto.realName
+      });
+
       res.status(HttpStatus.CREATED).send();
     }
   }
