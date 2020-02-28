@@ -360,6 +360,48 @@ launch-menu-screen .read-me-panel .btn {
   bottom: 6.4%;
 }
 
+/* This panel shows info to the user */
+launch-menu-screen .info-panel {
+  width: 360px;
+  height: 196px;
+  display: block;
+  position: absolute;
+  right: calc(50% - 180px);
+  bottom: calc(50% - 120px);
+  background-image: url("assets/ui/launch/panels/info.bmp");
+  zoom: 1.6;
+}
+
+/* Info message paragraphs display */
+launch-menu-screen .info-panel .message-text {
+  position: absolute;
+  width: 84.7%;
+  top: 12.9%;
+  left: 8%;
+  height: 57.6%;
+  max-height: 57.6%;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+/* Info message individual paragraph */
+launch-menu-screen .info-panel .message-text pre {
+  color: #eeeec5;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  font-family: "launch-menu";
+  font-size: 18px;
+  width: 97.5%;
+  line-height: 17px;
+}
+
+/* Info panel button positioning */
+launch-menu-screen .info-panel .btn {
+  position: absolute;
+  right: calc(50% - 45.5px);
+  bottom: 6.4%;
+}
+
 /* The message text scrollbar */
 .message-text::-webkit-scrollbar {
   width: 6%;

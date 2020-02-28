@@ -181,3 +181,15 @@
   <!-- Okay button to close the read-me panel -->
   <button (click)="clearReadMe()" class="btn btn-3 ok"></button>
 </div>
+
+<!-- Displays info to the user -->
+<div [ngClass]="{ 'no-op': (! this.activeInfo.paragraphs) }" class="info-panel">
+
+  <!-- Read-me message paragraphs -->
+  <div class="message-text">
+    <pre *ngFor="let paragraph of this.activeInfo.formattedParagraphs()">{{paragraph}}</pre>
+  </div>
+
+  <!-- Okay button to close the info panel -->
+  <button (click)="clearInfo()" class="btn btn-3 ok"></button>
+</div>

@@ -25,7 +25,7 @@ export class LaunchScreenComponent implements OnInit {
   /**
    * String to keep track of which panel is active.
    */
-  public activePanel: string | null = 'new-character';
+  public activePanel: string | null = null;
 
   /**
    * Object to store the active note being showed to the user, null when inactive.
@@ -36,6 +36,17 @@ export class LaunchScreenComponent implements OnInit {
    * Object to store the active read-me paragraphs being showed to the user and a format function.
    */
   public activeReadMe: any | null = {
+    paragraphs: null,
+
+    formattedParagraphs() {
+      return this.paragraphs ? this.paragraphs.map(p => { return p.trim().replace(/(\t{2,99}|\s{2,99})/g, ' ') }) : null;
+    }
+  };
+
+  /**
+   * Object to store the active info paragraphs being showed to the user and a format function.
+   */
+  public activeInfo: any | null = {
     paragraphs: null,
 
     formattedParagraphs() {
@@ -96,6 +107,20 @@ export class LaunchScreenComponent implements OnInit {
 
     // Load the hero image
     this.loadHeroImage();
+
+    // Show updates info
+    this.showInfo([
+      `It is very important that you enter your correct real name, location and email address when
+      creating an account. Our system will ask you to enter your real name and email address in
+      case you have forgotten your password.`,
+      
+      `A lot of players who forgot their password, and signed up using fake details, have been 
+      unsuccessful in gaining access to their account. So please do not make the same mistake; 
+      use real details to sign up for an account.`,
+
+      `Your information will only be used for recovering lost passwords. Your privacy is important
+      to us.`
+    ]);
   }
 
   /**
@@ -277,6 +302,27 @@ export class LaunchScreenComponent implements OnInit {
 
     // Get the message text element
     const messageText: HTMLElement = document.querySelector('.read-me-panel .message-text');
+    
+    // Reset the scrolling
+    messageText.scrollTop = 0;
+  }
+
+  /**
+   * This function shows the user info.
+   * @param {array} paragraphs - An array of paragraphs (strings) to load into the info.
+   */
+  showInfo(paragraphs: string[]) : void {
+    this.activeInfo.paragraphs = paragraphs;
+  }
+
+  /**
+   * This function clears the active info.
+   */
+  clearInfo() : void {
+    this.activeInfo.paragraphs = null;
+
+    // Get the message text element
+    const messageText: HTMLElement = document.querySelector('.info-panel .message-text');
     
     // Reset the scrolling
     messageText.scrollTop = 0;
