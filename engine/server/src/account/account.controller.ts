@@ -1,4 +1,4 @@
-import { Controller, Post, Body, HttpCode, UnauthorizedException, HttpStatus, Res } from '@nestjs/common';
+import { Controller, Post, Body, HttpCode, UnauthorizedException, HttpStatus, Res, Req } from '@nestjs/common';
 import { AccountService } from './account.service';
 import { CreateAccountDTO } from './dtos/create.dto';
 import { CheckAccountDTO } from './dtos/check.dto';
@@ -35,7 +35,8 @@ export class AccountController {
    * @param {CreateAccountDTO} dto - data transfer object containing account info.
    */
   @Post()
-  async create(@Body() dto: CreateAccountDTO, @Res() res) : Promise<any> {
+  async create(@Body() dto: CreateAccountDTO, @Res() res, @Req() req: any) : Promise<any> {
+    console.log(`[EE] Account creation attempt for '${dto.accountName}'.`)
 
     // Get the account from the DB
     const account = await this.service.findOne({ accountName: s(dto.accountName) });
@@ -50,21 +51,27 @@ export class AccountController {
 
     // Invalid account info
     if (invalidInfo) {
+      console.log(`[EE] Account creation failed - invalid info: '${dto.accountName}'.`);
+
       res.status(HttpStatus.I_AM_A_TEAPOT).send();
     }
 
     // The account name already exists
     else if (account) {
+      console.log(`[EE] Account creation failed - already exists: '${dto.accountName}'.`);
+
       res.status(HttpStatus.CONFLICT).send();
     } 
     
     // Create a new account
     else {
+      console.log(`[EE] Account creation success - new account: '${dto.accountName}'.`);
+
       await this.service.create({
         accountName: s(dto.accountName),
         countyOrLocation: dto.countyOrLocation,
         email: s(dto.email),
-        password: s(dto.accountName),
+        password: dto.password,
         realName: dto.realName
       });
 
@@ -92,16 +99,22 @@ export class AccountController {
 
     // Invalid account info
     if (invalidInfo) {
+      console.log(`[EE] Account check failed - invalid info: '${dto.accountName}'.`);
+
       res.status(HttpStatus.I_AM_A_TEAPOT).send();
     }
 
     // The account name or email already exists
     else if (accountName || email) {
+      console.log(`[EE] Account check failed - already exists: '${dto.accountName}'.`);
+
       res.status(HttpStatus.CONFLICT).send();
     } 
     
     // The account name and email are available
     else {
+      console.log(`[EE] Account check success - account available: '${dto.accountName}'.`);
+
       res.status(HttpStatus.OK).send();
     }
   }

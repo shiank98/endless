@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "4b07ec13-d33a-4d26-aa96-a25c7722daad",
+		"_postman_id": "602417f1-944e-49de-83fb-e28581f38fd3",
 		"name": "endless",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -118,7 +118,16 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": ""
+					"raw": "http://localhost:3000/app/ping",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"app",
+						"ping"
+					]
 				}
 			},
 			"response": []
