@@ -9,8 +9,8 @@ import { LoginAccountDTO } from './dtos/login.dto';
  * @version 1.0.0
  * @param {string} str - the string to be sanitised.
  */ 
-export const s: Function = (str: string) : string => {
-  return str.toLowerCase().replace(/(\s|\t)*/g, '');
+export const s: Function = (str: string) : string | null => {
+  return str ? str.toLowerCase().replace(/(\s|\t)*/g, '') : null;
 }
 
 /**
@@ -118,7 +118,7 @@ export class AccountController {
     // Validate the login details received
     const authed = await this.service.validate({ 
       accountName: s(dto.accountName), 
-      password: dto.password 
+      password: dto.password
     });
 
     // They weren't authed
