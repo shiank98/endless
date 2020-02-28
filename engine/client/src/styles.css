@@ -14,7 +14,7 @@
 /**
  * Global Styles
  */
- 
+
 html, body {
   overflow: hidden;
 }
@@ -88,6 +88,8 @@ launch-menu-screen .main-menu {
   position: absolute;
   bottom: 10%;
   left: 4%;
+  transform: scale(1.6);
+  transform-origin: left bottom;
 }
 
 /* Main menu screen buttons */
@@ -95,13 +97,12 @@ launch-menu-screen .btn-1 {
   display: block !important;
   width: 180px;
   height: 40px;
-  zoom: 1.8;
 }
 
 launch-menu-screen .btn-2 {
   width: 120px;
   height: 40px;
-  zoom: 0.8;
+  transform: scale(0.8);
 }
 
 launch-menu-screen .btn-3,
@@ -205,7 +206,8 @@ launch-menu-screen .play-game-panel {
   right: 10%;
   bottom: 10%;
   background-image: url("assets/ui/launch/panels/play-game.bmp");
-  zoom: 1.6;
+  transform: scale(1.6);
+  transform-origin: right bottom;
 }
 
 /* Container for the play game panel buttons */
@@ -213,6 +215,15 @@ launch-menu-screen .play-game-panel .buttons {
   position: absolute;
   right: 10%;
   bottom: 10%;
+}
+
+launch-menu-screen .play-game-panel .btn {
+  transform-origin: right bottom;
+}
+
+launch-menu-screen .play-game-panel .btn:first-of-type {
+  position: relative;
+  left: 10%;
 }
 
 /* Game game (login) inputs positioning */
@@ -228,13 +239,14 @@ launch-menu-screen .play-game-panel .input-password {
 
 /* This panel shows the create account controls */
 launch-menu-screen .create-account-panel {
-  width: 40%;
-  height: 80%;
+  width: calc(40% / 1.6);
+  height: calc(95% / 1.6);
   display: block;
   position: absolute;
   right: 5%;
   top: 5%;
-  zoom: 1.6;
+  transform: scale(1.6);
+  transform-origin: right top;
   background: none;
 }
 
@@ -252,8 +264,17 @@ launch-menu-screen .create-account-panel .form-spacer {
 /* Container for the create account panel buttons */
 launch-menu-screen .create-account-panel .buttons {
   position: fixed;
-  right: 5%;
+  right: 0%;
   bottom: 5%;
+}
+
+launch-menu-screen .create-account-panel .btn {
+  transform-origin: right bottom;
+}
+
+launch-menu-screen .create-account-panel .btn.create {
+  position: relative;
+  left: 5%;
 }
 
 /* This panel shows a note to the user */
@@ -265,7 +286,8 @@ launch-menu-screen .note-panel {
   right: calc(50% - 145px);
   bottom: calc(50% - 78px);
   background-image: url("assets/ui/launch/panels/note.bmp");
-  zoom: 1.6;
+  transform: scale(1.6);
+  transform-origin: center;
 }
 
 /* Note title text display */
@@ -327,7 +349,8 @@ launch-menu-screen .read-me-panel {
   right: calc(50% - 180px);
   bottom: calc(50% - 120px);
   background-image: url("assets/ui/launch/panels/read-me.bmp");
-  zoom: 1.6;
+  transform: scale(1.6);
+  transform-origin: center;
 }
 
 /* Read-me message paragraphs display */
@@ -369,7 +392,8 @@ launch-menu-screen .info-panel {
   right: calc(50% - 180px);
   bottom: calc(50% - 120px);
   background-image: url("assets/ui/launch/panels/info.bmp");
-  zoom: 1.6;
+  transform: scale(1.6);
+  transform-origin: center;
 }
 
 /* Info message paragraphs display */
@@ -422,12 +446,13 @@ launch-menu-screen .info-panel .btn {
 /* This panel shows the character slots */
 launch-menu-screen .character-slots-panel {
   width: 276px;
-  height: 100%;
+  height: calc(100% / 1.4);
   display: block;
   position: absolute;
   right: 10%;
   top: 4%;
-  zoom: 1.4;
+  transform: scale(1.4);
+  transform-origin: top right;
 }
 
 /* Displays a character slot */
@@ -441,7 +466,7 @@ launch-menu-screen .character-slots-panel .slot {
 
 /* Container for the character slots panel buttons */
 launch-menu-screen .character-slots-panel .slot .buttons {
-  zoom: 1;
+  transform: scale(1);
   position: absolute;
   top: unset;
   right: 8.75%;
@@ -457,7 +482,17 @@ launch-menu-screen .character-slots-panel .slot .btn {
 launch-menu-screen .character-slots-panel .buttons {
   position: relative;
   top: 1%;
-  zoom: 1.2;
+  transform: scale(1.2);
+  transform-origin: left top;
+}
+
+launch-menu-screen .character-slots-panel .btn {
+  transform-origin: left top;
+}
+
+launch-menu-screen .character-slots-panel .btn.cancel {
+  position: relative;
+  right: 5%;
 }
 
 /* This panel shows the new character display */
@@ -469,7 +504,7 @@ launch-menu-screen .character-slots-panel .buttons {
   right: calc(50% - 180px);
   bottom: calc(50% - 120px);
   background-image: url("assets/ui/launch/panels/new-character.bmp");
-  zoom: 1.6;
+  transform: scale(1.6);
 }
 
 /* New character preview display */
