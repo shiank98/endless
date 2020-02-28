@@ -36,7 +36,7 @@ export class AccountController {
    */
   @Post()
   async create(@Body() dto: CreateAccountDTO, @Res() res, @Req() req: any) : Promise<any> {
-    console.log(`[EE] Account creation attempt for '${dto.accountName}'.`)
+    console.log(`[EE] Account creation attempt - for: '${s(dto.accountName)}'.`)
 
     // Get the account from the DB
     const account = await this.service.findOne({ accountName: s(dto.accountName) });
@@ -51,21 +51,21 @@ export class AccountController {
 
     // Invalid account info
     if (invalidInfo) {
-      console.log(`[EE] Account creation failed - invalid info: '${dto.accountName}'.`);
+      console.log(`[EE] Account creation failed - invalid info: '${s(dto.accountName)}'.`);
 
       res.status(HttpStatus.I_AM_A_TEAPOT).send();
     }
 
     // The account name already exists
     else if (account) {
-      console.log(`[EE] Account creation failed - already exists: '${dto.accountName}'.`);
+      console.log(`[EE] Account creation failed - already exists: '${s(dto.accountName)}'.`);
 
       res.status(HttpStatus.CONFLICT).send();
     } 
     
     // Create a new account
     else {
-      console.log(`[EE] Account creation success - new account: '${dto.accountName}'.`);
+      console.log(`[EE] Account creation success - new account: '${s(dto.accountName)}'.`);
 
       await this.service.create({
         accountName: s(dto.accountName),
@@ -99,21 +99,21 @@ export class AccountController {
 
     // Invalid account info
     if (invalidInfo) {
-      console.log(`[EE] Account check failed - invalid info: '${dto.accountName}'.`);
+      console.log(`[EE] Account check failed - invalid info: '${s(dto.accountName)}'.`);
 
       res.status(HttpStatus.I_AM_A_TEAPOT).send();
     }
 
     // The account name or email already exists
     else if (accountName || email) {
-      console.log(`[EE] Account check failed - already exists: '${dto.accountName}'.`);
+      console.log(`[EE] Account check failed - already exists: '${s(dto.accountName)}'.`);
 
       res.status(HttpStatus.CONFLICT).send();
     } 
     
     // The account name and email are available
     else {
-      console.log(`[EE] Account check success - account available: '${dto.accountName}'.`);
+      console.log(`[EE] Account check success - account available: '${s(dto.accountName)}'.`);
 
       res.status(HttpStatus.OK).send();
     }
@@ -127,6 +127,7 @@ export class AccountController {
   @Post('login')
   @HttpCode(201)
   async login(@Body() dto: LoginAccountDTO) : Promise<any> {
+    console.log(`[EE] Account login attempt - for: '${s(dto.accountName)}'.`)
 
     // Validate the login details received
     const authed = await this.service.validate({ 
@@ -136,10 +137,14 @@ export class AccountController {
 
     // They weren't authed
     if (! authed) {
+      console.log(`[EE] Account login failed - for: '${s(dto.accountName)}'.`);
+      
       throw new UnauthorizedException();
     }
 
     // The request was valid so authenticate them
+    console.log(`[EE] Account login success - for: '${s(dto.accountName)}'.`);
+
     return this.service.auth(dto);
   }
 }
