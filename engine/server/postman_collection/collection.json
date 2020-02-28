@@ -111,6 +111,17 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "app/ping",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": ""
+				}
+			},
+			"response": []
 		}
 	],
 	"protocolProfileBehavior": {}
