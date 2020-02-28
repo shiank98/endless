@@ -17,14 +17,14 @@ export class AccountService {
   /**
    * The JWT access token is used for authenticating requests with the server.
    */
-  private accessToken: any = null;
+  public accessToken: any = null;
 
   /**
    * The account service constructor.
    * @param {HttpClient} http - The HTTP client is used for making requests to the server.
    */
   constructor(
-    private http: HttpClient
+    public http: HttpClient
   ) {}
 
   /**

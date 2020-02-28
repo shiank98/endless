@@ -2,5 +2,6 @@
  * Production environment config
  */
 export const env = {
-  production: true
+  production: true,
+  server: 'SERVER_URL'
 };

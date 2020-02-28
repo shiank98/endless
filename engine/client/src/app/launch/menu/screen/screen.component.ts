@@ -15,27 +15,27 @@ export class LaunchScreenComponent implements OnInit {
   /**
    * Button type 1 sound effect.
    */
-  private sfxButton1 = new Audio('assets/sfx/button-click-1.wav');
+  public sfxButton1 = new Audio('assets/sfx/button-click-1.wav');
 
   /**
    * Button type 2 sound effect.
    */
-  private sfxButton2 = new Audio('assets/sfx/button-click-2.wav');
+  public sfxButton2 = new Audio('assets/sfx/button-click-2.wav');
 
   /**
    * String to keep track of which panel is active.
    */
-  private activePanel: string | null = 'new-character';
+  public activePanel: string | null = 'new-character';
 
   /**
    * Object to store the active note being showed to the user, null when inactive.
    */
-  private activeNote: any | null = null;
+  public activeNote: any | null = null;
 
   /**
    * Object to store the active read-me paragraphs being showed to the user and a format function.
    */
-  private activeReadMe: any | null = {
+  public activeReadMe: any | null = {
     paragraphs: null,
 
     formattedParagraphs() {
@@ -46,12 +46,12 @@ export class LaunchScreenComponent implements OnInit {
   /**
    * Stores the active timeout, allowing us to clear it prematurely.
    */
-  private activeTimer: any | null = null;
+  public activeTimer: any | null = null;
 
   /**
    * Stores the data of new characters being created.
    */
-  private newCharacter: any | null = {
+  public newCharacter: any | null = {
     gender: 'female',
     hairColour: 'brown',
     hairStyle: 1,
@@ -61,14 +61,14 @@ export class LaunchScreenComponent implements OnInit {
   /**
    * Stores the hair colours for character customisation.
    */
-  private hairColours: Array<string> = [
+  public hairColours: Array<string> = [
     'brown', 'green', 'pink', 'red', 'yellow', 'blue', 'purple', 'cyan', 'white', 'black'
   ];
 
   /**
    * Stores the skin colours for character customisation.
    */
-  private skinColours: Array<string> = [
+  public skinColours: Array<string> = [
     'light', 'tan', 'yellow', 'green', // 'skeleton', 'panda', 'fish'
   ];
 
@@ -77,7 +77,7 @@ export class LaunchScreenComponent implements OnInit {
    * @param {AccountServer} accountService - The account service used for account creation.
    */
   constructor(
-    private accountService: AccountService
+    public accountService: AccountService
   ) { }
   
   /**
