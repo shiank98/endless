@@ -41,6 +41,7 @@ export class AccountController {
     const account = await this.service.findOne({ accountName: s(dto.accountName) });
 
     const invalidInfo = (
+      ! dto.accountName.match(/^\w+$/) ||
       dto.accountName.length > 40 ||
       dto.countyOrLocation.length > 40 ||
       dto.email.length > 40 ||
@@ -76,8 +77,19 @@ export class AccountController {
     const accountName = await this.service.findOne({ accountName: s(dto.accountName) });
     const email = await this.service.findOne({ email: s(dto.email) });
 
+    const invalidInfo = (
+      ! dto.accountName.match(/^\w+$/) ||
+      dto.accountName.length > 40 ||
+      dto.email.length > 40
+    ) ? true : false;
+
+    // Invalid account info
+    if (invalidInfo) {
+      res.status(HttpStatus.I_AM_A_TEAPOT).send();
+    }
+
     // The account name or email already exists
-    if (accountName || email) {
+    else if (accountName || email) {
       res.status(HttpStatus.CONFLICT).send();
     } 
     
