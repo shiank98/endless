@@ -15,6 +15,6 @@ export class AppController {
    * @param {CreateAccountDTO} dto - data transfer object containing account info.
    */
   @Get('ping')
-  @HttpCode(202)
-  async ping() {}
+  @HttpCode(200)
+  ping() {}
 }
