@@ -11,6 +11,8 @@ async function bootstrap() {
   // Enable CORS (Cross-origin resource sharing) in the server application
   app.enableCors();
 
-  await app.listen(3000);
+  await app.listen(process.env.PORT || 3000);
+
+  console.log(`Server running on port ${process.env.PORT || 3000}`)
 }
 bootstrap();
