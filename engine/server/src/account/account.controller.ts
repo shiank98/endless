@@ -5,6 +5,15 @@ import { CheckAccountDTO } from './dtos/check.dto';
 import { LoginAccountDTO } from './dtos/login.dto';
 
 /**
+ * Function used for sanitising strings for account functions.
+ * @version 1.0.0
+ * @param {string} str - the string to be sanitised.
+ */ 
+export const s: Function = (str: string) : string => {
+  return str.toLowerCase().replace(/(\s|\t)*/g, '');
+}
+
+/**
  * This controller handles the accounts alongside it's service and module.
  * @version 1.0.0
  */
@@ -29,7 +38,7 @@ export class AccountController {
   async create(@Body() dto: CreateAccountDTO, @Res() res) : Promise<any> {
 
     // Get the account from the DB
-    const account = await this.service.findOne({ accountName: dto.accountName });
+    const account = await this.service.findOne({ accountName: s(dto.accountName) });
 
     // The account name already exists
     if (account) {
@@ -52,8 +61,8 @@ export class AccountController {
   async check(@Body() dto: CheckAccountDTO, @Res() res) : Promise<any> {
 
     // Get the account from the DB
-    const accountName = await this.service.findOne({ accountName: dto.accountName });
-    const email = await this.service.findOne({ email: dto.email });
+    const accountName = await this.service.findOne({ accountName: s(dto.accountName) });
+    const email = await this.service.findOne({ email: s(dto.email) });
 
     // The account name or email already exists
     if (accountName || email) {
@@ -76,7 +85,10 @@ export class AccountController {
   async login(@Body() dto: LoginAccountDTO) : Promise<any> {
 
     // Validate the login details received
-    const authed = await this.service.validate(dto);
+    const authed = await this.service.validate({ 
+      accountName: s(dto.accountName), 
+      password: dto.password 
+    });
 
     // They weren't authed
     if (! authed) {
